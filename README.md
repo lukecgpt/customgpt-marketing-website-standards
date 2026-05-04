@@ -123,8 +123,3 @@ All pages are published via the WordPress REST API. The builder includes the ful
 4. Page template set to `elementor_header_footer`
 5. WP block margin fix
 
----
-
-## What is not in this repo
-
-`/customgpt-lp-builder` is a deprecated predecessor to `/customgpt-page-builder`. It only handled integration pages and had no widget library or multi-template support. It has been retired. Use `/customgpt-page-builder` for all page types.
