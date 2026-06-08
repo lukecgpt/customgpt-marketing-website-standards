@@ -27,294 +27,288 @@ Cite the exact element, class, or value for every Warn and Fail.
 
 ### CATEGORY 1 — Color Palette
 
-**CustomGPT brand colors — source of truth: `index.html` CSS variables + user-supplied palette:**
+**CustomGPT brand colors — source of truth: `customgpt-tokens.css`. This is the closed palette. Any hex not on this list is a violation unless it is an opacity-tinted variant of one of these tokens (e.g. `rgba(115,103,240,.12)` icon-container fills).**
 
-| Role | Hex | Usage |
+| Role | Hex / Token | Usage |
 |---|---|---|
-| Primary pink (emphasis) | `#EE55FF` | Hero CTA button, active tab (Chatbot), primary highlight |
-| Secondary periwinkle | `#7E76FF` | Chat UI elements, user bubbles, mid-weight CTAs |
-| Accent cyan | `#BCFCFF` | Accent elements, light decorative use |
-| Darker blue | `#602ffc` | In-page CTAs (use-case panels), active tab (Search), rich action buttons |
-| Midtone purple | `#B9B4FF` | Midtone fills, subtle accent |
-| Darkest blue | `#3b2879` | Deep backgrounds, heavy text accents |
-| Purple (interactive) | `#7c3aed` | Eyebrow text, inline stats, citation badges, hover states, italic accents |
-| Indigo (legacy primary) | `#5046e5` | CSS var `--color-primary`; used in nav badge, step numbers, some text |
-| Background white | `#ffffff` | Default section bg |
-| Background soft lavender | `#f8f7ff` or `#f7f5ff` | Alternate section bg (use-cases, soft sections) |
-| Background light blue | `#F1F2FF` | On-page light blue bg elements |
-| Background light tan | `#F5F5F5` | On-page light tan bg elements |
-| Footer bg | `#faf8ff` | Footer background |
-| Dark bg | `#0a0a1a` | Dark sections |
-| Navy bg | `#0f0e2e` | Deep navy sections (Why CustomGPT panel) |
-| Dark navy bg gradient | `linear-gradient(135deg, #0f0e2e 0%, #1e1b4b 100%)` | Why section dark panel |
-| Text primary | `#111827` or `#1a1a2e` | Body and headline text on light backgrounds |
-| Text muted | `#6b7280` | Secondary descriptive text |
-| Text light | `#9ca3af` | Friction copy, captions, metadata |
-| Border | `#e5e7eb` | Default card/divider border |
-| Border soft | `#ede9fe` | Soft badge/pill borders |
+| Primary indigo | `#7367f0` (`--color-primary`) | All button fills, links, step numbers, stat values, icon strokes |
+| Primary hover | `#5a52d4` (`--color-primary-hover`) | Hover state for primary buttons/links |
+| Purple | `#7c3aed` (`--color-purple`) | Eyebrows (some), inline stats, citation badges, italic accents |
+| Pink (marketing accent ONLY) | `#EE55FF` (`--color-pink`) | Decorative accent / icon tint only — NEVER a button fill |
+| Pink hover | `#d93eea` (`--color-pink-hover`) | Hover for the pink accent only |
+| Star | `#fbbf24` (`--color-star`) | Star ratings |
+| Warning | `#f97316` (`--color-warning`) | Upgrade nudges, billing callouts |
+| Warning dark | `#ea580c` (`--color-warning-dark`) | Warning hover/emphasis |
+| Warning bg | `#fff7ed` (`--color-warning-bg`) | Light orange fill |
+| Warning border | `#fb923c` (`--color-warning-border`) | Mid orange border |
+| Page background | `#faf9f6` (`--color-bg`) | Page base — warm off-white |
+| Neutral background | `#f0ede6` (`--color-bg-neutral`) | Secondary cards, step cards, `.section--soft` alternates |
+| Dark background | `#0a0a1a` (`--color-bg-dark`) | Dark sections (security, final CTA) — paired with canonical paper background-image |
+| Text primary | `#111827` (`--color-text`) | All primary text: headlines, body, card text |
+| Text muted | `#4b5563` (`--color-text-muted`) | All secondary text: labels, captions, supporting copy |
+| On-dark text | `#ffffff` (`--color-on-dark`) | Primary text on dark bg |
+| On-dark muted | `rgba(255,255,255,.75)` (`--color-on-dark-muted`) | Secondary text on dark bg |
+| On-dark accent | `#a5b4fc` (`--color-on-dark-accent`) | Eyebrow / accent on dark bg (light indigo) |
+| Border | `#b8b2a8` (`--color-border`) | Standard border — warm tan; also ghost button border |
+| Border soft | `#ede9fe` (`--color-border-soft`) | Soft lavender border (light bg only, rare) |
+| Icon-tint lavender | `#a78bfa` | Lucide icon stroke tint only (see Category 5) — not a fill or text color |
 
-**Hero CTA gradient:** `linear-gradient(135deg, #EE55FF 0%, #c026d3 100%)` — the pink is the primary emphasis color for the highest-priority CTA on any page.
-
-**In-page panel/feature CTA gradient:** `linear-gradient(135deg, #602ffc 0%, #7E76FF 100%)` — used for mid-page action buttons inside use-case panels and feature sections.
+**Retired colors — FLAG any of these as a violation if found (they belong to the old pre-CustomGPT system):**
+- `#5046e5` (old primary — must be `#7367f0`)
+- `#602ffc` (old "darker blue") and `#7E76FF` (old periwinkle) — and any `linear-gradient(135deg, #602ffc … #7E76FF)` button gradient
+- `#c026d3` (old pink-dark, used in the retired hero pink gradient)
+- `#ec4899` (old accent-pink — except as an icon tint is still not approved; flag it)
+- Old navy gradient `linear-gradient(135deg, #0f0e2e 0%, #1e1b4b 100%)` and the `#0f0e2e` / `#1e1b4b` navy values
+- `#f8f7ff` / `#f7f5ff` (old `--color-bg-soft` lavender) — section alternates must be `#f0ede6`
+- `#ffffff` / `#f9fafb` as a PAGE or CARD background (page must be `#faf9f6`, cards `#faf9f6` or `#f0ede6`)
+- `#e5e7eb` (old border — must be warm tan `#b8b2a8`)
+- `#6b7280` / `#9ca3af` (old muted/light text — must be `#4b5563`)
 
 **Checks:**
-1. Are all background colors from the approved palette above or clearly derived from it?
-2. Is `#EE55FF` (pink) used as the primary hero CTA — not diluted, replaced with indigo, or missing entirely?
-3. Is the `#602ffc → #7E76FF` gradient used for in-page CTAs (not raw indigo or unbranded colors)?
-4. Are `#7c3aed` / purple variants used correctly for interactive text, eyebrows, and citation signals — not as primary button fills?
-5. Are non-brand colors (pure red, orange, teal without context) used without a documented justification?
-6. Does text on dark backgrounds (`#0a0a1a`, `#0f0e2e`) use `#fff` or near-white — not the primary body text color?
-7. Are gradient directions consistent (135deg for buttons, 90deg for banners/bars)?
+1. Are all background colors from the approved palette above? (Page bg must be `#faf9f6`; FLAG pure white `#ffffff` or `#f9fafb` used as page or card background.)
+2. Is `#7367f0` (`--color-primary`) used for all button fills and primary interactive color — NOT the old `#5046e5`, and NOT a pink or gradient fill?
+3. Is `#EE55FF` (pink) used ONLY as a marketing/decorative accent or icon tint — NEVER as a button fill? FLAG any pink button.
+4. Are the retired colors absent? FLAG every occurrence of `#5046e5`, `#602ffc`, `#7E76FF`, `#c026d3`, the navy gradient, or `#f8f7ff`.
+5. Are `#7c3aed` / purple variants used correctly for interactive text, eyebrows, stats, and citation signals — not as primary button fills?
+6. Does text on the dark background (`#0a0a1a`) use `#fff` / `rgba(255,255,255,.75)` / `#a5b4fc` — not the light-bg body text color?
+7. Are borders the warm tan `#b8b2a8` (`--color-border`) — not the old cool grey `#e5e7eb`?
+8. Are non-brand colors (pure red, teal, unapproved orange without the warning-token context) used without justification?
 
 ---
 
 ### CATEGORY 2 — Typography
 
-**CustomGPT type system — source of truth: `index.html`**
+**CustomGPT type system — source of truth: `customgpt-tokens.css` + `CUSTOMGPT_DESIGN_SYSTEM.md` § 2**
 
-- **Font family:** `Inter` (Google Fonts) — all weights 300–900 — this is the ONLY brand font
-- **Google Fonts URL:** `https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap`
+- **Two-family system:**
+  - **Headings (`.h1`/`.h2`/`.h3`, stat values, card titles, quotes):** `'Lora', Georgia, serif` — weights 600–700. Headings carry `font-family: 'Lora', Georgia, serif !important`.
+  - **Body / UI (everything else):** `'Inter', system-ui, sans-serif` — weights 300–900.
+- **Google Fonts URL (both families):** `https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap`
 - **Font smoothing:** `-webkit-font-smoothing: antialiased` on `body`
-- **No other font families** — no system-ui as primary, no Roboto, no DM Sans, no other Google Font
+- **No third typeface** — no Roboto, DM Sans, or other Google Font beyond Inter + Lora.
 
-**Type scale (all use `clamp()` for responsive scaling):**
-| Class | Size | Weight | Letter-spacing |
-|---|---|---|---|
-| `.h1` | `clamp(40px, 5vw, 68px)` | 900 | `-0.03em` |
-| `.h2` | `clamp(30px, 3.5vw, 48px)` | 800 | `-0.025em` |
-| `.h3` | `clamp(20px, 2.2vw, 28px)` | 700 | `-0.018em` |
-| `.h4` | `18px` | 700 | — |
-| `.lead` | `clamp(16px, 1.5vw, 20px)` | 400 | — |
-| Hero headline | `clamp(38px, 5vw, 56px)` | (inherits 900) | — |
+**Type scale (headings use `clamp()` for responsive scaling):**
+| Class | Family | Size | Weight | Letter-spacing |
+|---|---|---|---|---|
+| `.h1` | Lora | `clamp(38px, 5vw, 58px)` | 700 | `-0.02em` |
+| `.h2` | Lora | `clamp(28px, 3.5vw, 44px)` | 700 | `-0.015em` |
+| `.h3` | Lora | `clamp(17px, 2vw, 22px)` | 600 | `-0.01em` |
+| `.lead` | Inter | `clamp(16px, 1.5vw, 20px)` | 400 | — |
+| `.stat__val` | Lora | `clamp(36px, 4vw, 52px)` | 700 | — |
 
 **Special text treatments:**
-- `.text-gradient`: `linear-gradient(135deg, #5046e5 0%, #ec4899 100%)` with `-webkit-background-clip: text`
-- `.text-gradient--light`: `linear-gradient(135deg, #a5b4fc 0%, #f9a8d4 100%)` — for dark backgrounds
-- `.hero__headline-accent`: `color: #7c3aed; font-style: italic` — for the emotional/emphatic line in the hero H2
-- `.eyebrow`: 13px, weight 700, `letter-spacing: .08em`, `text-transform: uppercase`, `color: var(--color-primary)` — purple on light; `.eyebrow--light` for dark sections
+- `.accent`: `color: var(--color-primary); font-style: italic; display: block` — for the emphatic line in a heading.
+- `.eyebrow`: `--text-ui` (13px), weight 700, `letter-spacing: .08em`, `text-transform: uppercase`, `color: var(--color-primary)` on light; `.eyebrow--light` (`--color-on-dark-accent`) for dark sections.
+- Italic is valid ONLY for block quotes / testimonials, and only in the Lora family.
+
+**Retired treatments — FLAG if found:** `.text-gradient` / `.text-gradient--light` are NOT in the canonical system — flag them as not-in-system (the indigo→pink and `#5046e5`/`#ec4899` gradient-text classes are retired). Inter (or any non-Lora) heading is a violation. Heading weight 800/900 is retired (headings are 600–700 Lora).
 
 **Header case convention:**
-- All on-page headings (H1–H4) use **sentence case** — capitalize the first word and proper nouns only. No title case.
+- All on-page headings (H1–H3) use **sentence case** — capitalize the first word and proper nouns only. No title case.
 - Proper nouns include: CustomGPT, AI, CustomGPT.ai, SOC 2, GDPR, and named organizations/products.
 - Eyebrows are exempt — they are `text-transform: uppercase` via CSS and should be written lowercase in HTML.
 
 **Checks:**
-1. Is `Inter` the only font loaded via Google Fonts — with the full weight range 300–900?
-2. Is `-webkit-font-smoothing: antialiased` applied to the body?
-3. Are all heading sizes using `clamp()` — not fixed px for multiple breakpoints?
-4. Is the hero headline using the italic purple accent for its secondary line (`.hero__headline-accent`)?
-5. Are eyebrow labels (section labels above H2s) uppercase, weight 700, purple — not written in sentence case or body copy weight?
-6. Is `.lead` used for section subheadlines below H2s — `clamp(16px, 1.5vw, 20px)`, muted color?
-7. Are letter-spacing values applied to headings (negative tracking for large display text) — not positive tracking which creates an airy/unbranded feel?
-8. Do all on-page H1–H4 headings use sentence case (first word + proper nouns only capitalized) — not title case?
+1. Are headings rendered in Lora (`'Lora', Georgia, serif`, weight 600–700)? FLAG any heading set in Inter or any non-Lora family as a violation.
+2. Is body / UI text set in Inter (300–900)? FLAG any third typeface.
+3. Are both Lora and Inter loaded via the single Google Fonts URL above?
+4. Is `-webkit-font-smoothing: antialiased` applied to the body?
+5. Are heading sizes using `clamp()` — not fixed px for multiple breakpoints — at weight 600–700 (not the retired 800/900)?
+6. Is the emphatic heading line using the italic indigo `.accent` treatment (not a retired `.text-gradient`)?
+7. Are eyebrow labels (section labels above H2s) uppercase, weight 700, `--color-primary` — not written in sentence case or body copy weight?
+8. Is `.lead` (Inter) used for section subheadlines below H2s — `clamp(16px, 1.5vw, 20px)`, muted color?
+9. Are `.text-gradient` classes absent? FLAG them as not-in-system if present.
+10. Do all on-page H1–H3 headings use sentence case (first word + proper nouns only capitalized) — not title case?
 
 ---
 
 ### CATEGORY 3 — Buttons & CTAs
 
-**CustomGPT button system — source of truth: `index.html`**
+**CustomGPT button system — source of truth: `CUSTOMGPT_DESIGN_SYSTEM.md` § 4.**
 
-**Hero primary CTA (highest emphasis — top of every LP):**
-- Shape: Pill — `border-radius: 100px`
-- Background: `linear-gradient(135deg, #EE55FF 0%, #c026d3 100%)`
+**The rule:** Every CTA is either **primary** (solid indigo fill) or **secondary** (ghost/outlined). In any two-CTA group there is exactly one primary and one secondary. The secondary is **always** ghost styling — regardless of whether it is itself a conversion action ("Book a demo", "Try free for 7 days" on a non-featured pricing card). Ghost variant is chosen by background, not by action type. There is no gradient button, no pill, no shadow, and no arrow anywhere in this system.
+
+**Hero / bottom primary CTA — `.btn--hero`:**
+- Background: solid `var(--color-primary)` = `#7367f0`
 - Color: `#fff`
-- Size: `padding: 15px 38px; font-size: 18px; font-weight: 700`
-- Shadow: `box-shadow: 0 4px 24px rgba(238,85,255,.4)`
-- Glint animation: `::after` pseudo with `left: -75% → 125%` sweep at 3.5s loop
-- Hover: darker gradient, `translateY(-1px)`, stronger shadow
-- Class: `.btn--hero`
+- Border: `1.5px solid #111827`
+- Shape: SQUARE — `border-radius: 0` (no radius)
+- Shadow: none
+- Size: `padding: 12px 24px; font-size: var(--text-md); font-weight: 700`
+- Hover: `background: var(--color-primary-hover)` (`#5a52d4`), `translateY(-1px)` — no shadow change
 
-**In-page primary CTA (use-case panels, feature sections):**
-- Shape: `border-radius: 10px` (not pill — this is the key distinction from hero)
-- Background: `linear-gradient(135deg, #602ffc 0%, #7E76FF 100%)`
+**Inline / mid-page / featured-pricing primary CTA — `.btn--primary`:**
+- Background: solid `var(--color-primary)` = `#7367f0`
 - Color: `#fff`
-- Glint animation: same `::after` sweep, 3s loop
-- Hover: `background-position: 100%`, lift + shadow increase
-- Class: `.uc-panel__cta`
+- Border: `1.5px solid #111827`
+- Shape: square, no shadow
+- Hover: `var(--color-primary-hover)`, `translateY(-1px)`
+- Weight 600
 
-**Standard primary CTA (mid-page CTAs, pricing cards):**
-- Background: `var(--color-primary)` = `#5046e5`
-- Color: `#fff`
-- Shape: `border-radius: var(--radius-md)` = `12px`
-- Shadow: `box-shadow: 0 4px 14px rgba(80,70,229,.35)`
-- Hover: darker + lift
-- Class: `.btn--primary`
+**Secondary CTA, light backgrounds — `.btn--ghost`:**
+- Background: transparent → hover `var(--btn-ghost-bg-hover)` (`#f0ede6` neutral fill)
+- Color: `#111827` (`--btn-ghost-text`), stays `#111827` on hover (NEVER an indigo hover)
+- Border: `1.5px solid var(--btn-ghost-border)` (`#b8b2a8` warm tan) → hover border `#111827`
+- Shape: square, no shadow; hover `translateY(-1px)`
 
-**Ghost CTA (secondary):**
-- Background: transparent
-- Border: `1.5px solid var(--color-border)`
-- Color: `var(--color-text)` (dark)
-- Hover: border turns purple, text turns purple
-- Class: `.btn--ghost`
+**Secondary CTA, dark backgrounds — `.btn--ghost-light`:**
+- Background: transparent, color `#fff`
+- Border: `1.5px solid rgba(255,255,255,.4)` → hover `rgba(255,255,255,.7)`
+- Shape: square, no shadow
 
-**Ghost light (on dark backgrounds):**
-- Border: `1.5px solid rgba(255,255,255,.3)`, white text
-- Class: `.btn--ghost-light`
+**Sizing:** A primary button is the SAME size whether it stands alone or sits in a button group. A lone primary is never larger than a paired one. Buttons are grouped in `.btn-group`.
 
-**Outline dark (hero secondary):**
-- Border: `1.5px solid rgba(30,20,60,.25)`, color `#3b1f8c`
-- Background: `rgba(255,255,255,.5)` — semi-transparent white
-- Shape: Pill — `border-radius: 100px`
-- Class: `.btn--outline-dark`
+**Arrows:** No button carries an arrow. Arrows (the `.arr` inline SVG) belong only to `.text-link` inline discovery links (e.g. "See full pricing details"), which are not button-shaped.
 
-**Size modifiers:**
-- `.btn--lg`: `padding: 15px 32px; font-size: 16px`
-- `.btn--sm`: `padding: 8px 16px; font-size: 13px; border-radius: var(--radius-sm)` = 6px
+**Retired button patterns — FLAG every one as a violation:**
+- Pink gradient hero (`linear-gradient(135deg, #EE55FF 0%, #c026d3 100%)`) or any pink-fill button
+- Blue→periwinkle gradient CTA (`linear-gradient(135deg, #602ffc 0%, #7E76FF 100%)`), e.g. old `.uc-panel__cta`
+- Pill shape — `border-radius: 100px` (or any non-zero `border-radius`) on a button
+- Any `box-shadow` on a button (resting or hover)
+- Old `.btn--outline-dark` (semi-transparent white pill, `#3b1f8c` text)
+- Glint `::after` sweep animation on a button
+- An arrow on a button
+- Old `--color-primary` value `#5046e5` as the fill (must be `#7367f0`)
 
 **Checks:**
-1. Is the hero CTA using the pink gradient pill (`.btn--hero`) — not a solid indigo or generic button?
-2. Do in-page panel CTAs use the darker blue → periwinkle gradient with a non-pill shape (border-radius ~10px)?
-3. Do mid-page and pricing CTAs use `.btn--primary` (solid indigo `#5046e5`) — not the hero pink, which would dilute the hero's emphasis?
-4. Do ghost/outline CTAs use the correct border color for their background context (dark border on light, white border on dark)?
-5. Do all pill-shaped buttons use `border-radius: 100px` — not `50%` or `border-radius: 24px`?
-6. Is the glint `::after` animation present on hero and in-page primary CTAs?
-7. Are button sizes appropriate to hierarchy — hero (`font-size: 18px`) > standard (`font-size: 15–16px`) > small (`font-size: 13px`)?
-8. Is CTA text action-oriented with friction context nearby ("7-day free trial · Cancel anytime" below the hero CTA)?
+1. Is the hero CTA a solid indigo `.btn--hero` (`#7367f0` fill, `#fff` text, `1.5px solid #111827` border, SQUARE corners, NO shadow)? FLAG a pink gradient pill, a shadow, or a rounded corner.
+2. Are there NO gradient buttons anywhere? FLAG the pink `#EE55FF→#c026d3` and blue `#602ffc→#7E76FF` gradient CTAs.
+3. Are all primary CTAs solid `var(--color-primary)` `#7367f0` — not the retired `#5046e5`, not pink, not a gradient?
+4. Is every secondary CTA ghost styling — `.btn--ghost` (tan `#b8b2a8` border, `#111827` text) on light bg; `.btn--ghost-light` (white border) on dark bg? FLAG an indigo hover on `.btn--ghost`.
+5. Do ALL buttons have square corners (`border-radius: 0`)? FLAG any `border-radius` on a button (`100px`, `10px`, `12px`, `50%`, `var(--radius-*)`).
+6. Do ALL buttons have no shadow? FLAG any `box-shadow` on a button.
+7. Is a lone primary the SAME size as a paired one? FLAG a hero button sized up beyond `padding: 12px 24px`.
+8. Are buttons free of arrows? (Arrows belong only to `.text-link`.) FLAG an arrow on a `.btn`.
+9. Is CTA text action-oriented with friction context nearby ("7-day free trial · Cancel anytime")?
 
 ---
 
 ### CATEGORY 4 — Spacing & Layout
 
-**CustomGPT layout standards — source of truth: `index.html`**
+**CustomGPT layout standards — source of truth: `customgpt-tokens.css` + `CUSTOMGPT_DESIGN_SYSTEM.md` § 1, § 3**
 
-- **Container max-width:** `1200px` — class `.container`, with `padding: 0 24px` on the sides
-- **Section vertical padding:** `96px` via `--section-y` — actual sections vary (`80px` for some, `96px` default)
+- **Container max-width:** `1200px` (`--max-w`) — class `.container`, with `padding: 0 24px` on the sides
+- **Section vertical padding:** `88px` via `--section-y` (`--section-y-sm` 64px, `--section-y-lg` 120px)
 - **Body overflow:** `overflow-x: hidden` should be present
 - **Mobile breakpoint:** `768px` (not 960px — this is NOT Proton)
 - **Grid:** CSS Grid or Flexbox only — no float-based layout
-- **Border radius system:**
-  - `--radius-sm: 6px` — badges, small UI
-  - `--radius-md: 12px` — standard buttons, cards
-  - `--radius-lg: 20px` — mockup windows, larger cards
-  - `--radius-xl: 32px` — hero elements, large panels
 
-**Shadow system:**
-- `--shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04)` — card resting state
-- `--shadow-md: 0 4px 16px rgba(0,0,0,.10)` — hover/elevated cards
-- `--shadow-lg: 0 12px 48px rgba(0,0,0,.14)` — major UI elements
-- `--shadow-glow: 0 0 40px rgba(80,70,229,.25)` — brand-tinted glow for hero visuals
+**Radius — always none.** Square corners everywhere. There are NO radius tokens. The global reset enforces `border-radius: 0 !important` (the `!important` beats the WP parent theme's rounded-corner rules). Any non-zero radius is a violation.
+
+**Shadow — always none.** Nothing on the site casts a shadow. There are NO shadow tokens. The global reset enforces `box-shadow: none !important` (the `!important` beats the WP parent theme's shadow rules). Any box-shadow is a violation.
+
+**Retired systems — FLAG if found:** the old radius tokens (`--radius-sm` 6px, `--radius-md` 12px, `--radius-lg` 20px, `--radius-xl` 32px) and shadow tokens (`--shadow-sm/md/lg/glow`) are gone. Any reference to `var(--radius-*)` or `var(--shadow-*)`, or any literal radius/shadow value, is a violation.
 
 **Checks:**
 1. Is the `.container` class constraining content to ~1200px with 24px side padding?
-2. Are section vertical paddings 80–96px on desktop, appropriately reduced on mobile?
+2. Are section vertical paddings ~64–120px on desktop (default `--section-y` 88px), appropriately reduced on mobile?
 3. Is the mobile breakpoint at 768px (or consistent with the homepage pattern)?
-4. Do multi-column layouts collapse to single column at `768px` or below?
-5. Are the radius values from the token system used — not arbitrary values like `border-radius: 5px` or `border-radius: 50px` on card elements?
-6. Are shadows from the token system — not custom heavy shadows (`box-shadow: 0 20px 60px rgba(0,0,0,.3)`) that feel inconsistent with the light, airy brand?
-7. Is `overflow-x: hidden` present on the body?
+4. Do multi-column layouts collapse appropriately at `768px` or below?
+5. Is the global reset present with `border-radius: 0 !important` AND `box-shadow: none !important` on `*, *::before, *::after`?
+6. Are ALL corners square? FLAG every non-zero `border-radius` — `100px`, `20px`, `12px`, `10px`, `5px`, `50%`, or any `var(--radius-*)` — including on cards, badges, mockups, and avatars.
+7. Are there NO shadows anywhere? FLAG every `box-shadow` (nav scrolled state, cards, buttons, custom heavy shadows like `0 20px 60px rgba(0,0,0,.3)`) and any `var(--shadow-*)`.
+8. Is `overflow-x: hidden` present on the body?
 
 ---
 
 ### CATEGORY 5 — Navigation
 
-**CustomGPT nav standards — source of truth: `index.html`**
+**CustomGPT nav standards — source of truth: `CUSTOMGPT_DESIGN_SYSTEM.md` § 6.1**
 
-- **Logo:** `https://customgpt.ai/wp-content/uploads/2023/11/CustomGPT-logo.svg` — 32px height, with SVG `onerror` fallback to a purple/pink gradient pill badge "C"
-- **Nav position:** `position: sticky; top: 0; z-index: 100`
-- **Nav bg:** `rgba(255,255,255,.92)` with `backdrop-filter: blur(12px)` and `border-bottom: 1px solid var(--color-border)`
-- **Scroll state:** `.nav.scrolled` adds `box-shadow: var(--shadow-md)`
-- **Nav height:** `68px`
-- **Links:** 14px, weight 500, muted color; hover to body text color + soft lavender background
-- **Primary nav CTA:** `.btn--primary` (solid indigo) — "Get started" or equivalent — NOT the pink hero button
-- **Mobile toggle:** hamburger icon, with `aria-expanded` state management
+- **Logo:** `https://customgpt.ai/wp-content/uploads/2023/11/CustomGPT-logo.svg` — 28px height
+- **Nav position:** `position: sticky; top: 0; z-index: var(--z-nav)` (100)
+- **Nav bg:** `var(--color-bg)` (`#faf9f6`) with `border-bottom: 1.5px solid #111827`
+- **Shadow:** none — there is no `.nav.scrolled` shadow (shadows are retired). FLAG any `box-shadow` on the nav.
+- **Nav height:** `64px`
+- **Links (`.nav__link`):** `--text-base` (14px), weight 500, `--color-text-muted`; hover to `--color-text` (no lavender background)
+- **CTAs (`.nav__actions`):** a `.btn--ghost` "Sign in" secondary plus a `.btn--hero` (solid indigo `#7367f0`) primary — NOT a pink or gradient button
+- **Mobile:** `.nav__links` are hidden below 768px; a hamburger toggle with `aria-expanded` state if a mobile menu is present
 
 **Checks:**
-1. Is the CustomGPT logo loaded from `customgpt.ai/wp-content/uploads/2023/11/CustomGPT-logo.svg`?
-2. Is there an `onerror` fallback for the logo?
-3. Is the nav sticky with backdrop blur?
-4. Is the nav primary CTA using `.btn--primary` (solid indigo) — not the pink hero CTA gradient?
-5. Are nav links at 14px, weight 500, with the correct muted + hover pattern?
-6. Is there a mobile hamburger toggle with proper `aria-expanded` attribute?
+1. Is the CustomGPT logo loaded from `customgpt.ai/wp-content/uploads/2023/11/CustomGPT-logo.svg` at ~28px height?
+2. Is the nav sticky (`position: sticky; top: 0`) with `border-bottom: 1.5px solid #111827` and bg `var(--color-bg)`?
+3. Does the nav have NO shadow in any state? FLAG a `.nav.scrolled` box-shadow or any `var(--shadow-*)`.
+4. Is the nav primary CTA a solid-indigo `.btn--hero` (`#7367f0`) — not a pink or gradient button?
+5. Are nav links at 14px, weight 500, muted color, hovering to `--color-text` (not a lavender bg)?
+6. If a mobile menu exists, is there a hamburger toggle with a proper `aria-expanded` attribute?
 
 ---
 
 ### CATEGORY 6 — Section Patterns
 
-**CustomGPT section anatomy — source of truth: `index.html`**
+**CustomGPT section anatomy — source of truth: `CUSTOMGPT_DESIGN_SYSTEM.md` § 6.**
 
 **HERO:**
-- Full-width section with background image from `https://customgpt.ai/wp-content/uploads/2026/03/custompt-hero-background.webp`
-- Optional decorative plant elements left and right (visibility:hidden until animation plays)
-- Centered single-column layout: `max-width: 900px; margin: 0 auto; text-align: center`
-- Top-to-bottom order: Eyebrow pill → H2 headline (typewriter/animated) → Descriptor paragraph → Hero CTA (pink pill) → Friction microcopy → Social proof avatars → Inline stats → Peek-up chat mockup
-- Peek-up mockup: `max-height: 300px; overflow: hidden` with `::after` gradient fade to white — scroll incentive
-- Padding: `100px 0 0` (asymmetric — top only, mockup bleeds into next section)
+- Full-width section with background image from the wp-content CDN, `border-bottom: 1.5px solid var(--color-border)`
+- Centered single-column layout: `max-width: ~860px; margin: 0 auto; text-align: center`
+- Top-to-bottom order: Eyebrow pill → H1 headline (Lora) → Descriptor paragraph → primary CTA (`.btn--hero`, solid indigo, square, no shadow) in a `.btn-group--center` → Friction microcopy → proof bar
+- Padding: asymmetric (e.g. `112px 0 80px`)
 
 **PROOF BAR (logo scroller):**
-- Immediately after hero — white background, `border-bottom: 1px solid var(--color-border)`
-- Label: "Trusted by 10,000+ organizations worldwide" centered, 14px weight 700
-- Infinite scroll: `translateX(0 → -50%)` on duplicated logo set, 32s linear, GPU-accelerated
+- Sits inside the hero on the paper background — transparent bg
+- Label: centered, `--text-ui` weight 600, muted color
+- Infinite scroll: `translateX(0 → -50%)` on duplicated logo set, 48s linear, GPU-accelerated
 - Logos: `grayscale(1) opacity: 0.55` → `grayscale(0) opacity: 1` on hover
 - Edge fade: `mask-image: linear-gradient(to right, transparent 0, #000 130px, #000 calc(100% - 130px), transparent)` — do NOT use overlay divs
-- Hover pauses animation; `prefers-reduced-motion` stops it
+- Hover pauses animation; `prefers-reduced-motion` stops it; all images `loading="eager"` + `draggable="false"`
 - Real logos from wp-content CDN: United Nations, MIT, Adobe, ICFJ, Dropbox, UVA, Medtronic (+ others)
 
-**USE CASES:**
-- Background: `#f7f5ff` (soft lavender), border-bottom
-- Per-tab accent color via `--uc-accent` CSS custom property
-- Tab colors: Support = `#06B6D4` (cyan), Search = `#602ffc` (darker blue), Chatbot = `#EE55FF` (pink), Expert = `#9333EA` (purple)
-- Two-column panel: copy left, chat mockup right
-- Mockup title bar uses `var(--uc-accent)` as background — color-codes to the active use case
+**STATS STRIP:**
+- `border-bottom: 1.5px solid var(--color-border)`
+- `.stat__val` in Lora, weight 700, `var(--color-primary)`
 
-**STEPS (3-step how it works):**
-- White background
-- 3-column grid, equal width
-- Step number: circular badge with indigo gradient, centered above card
-- Cards: `background: #f9fafb`, subtle border + shadow; hover: `translateY(-4px)` lift
-- Each step has a mini product mockup below the copy
+**VALUE PROPS / USE CASES / STEPS (card grids):**
+- Cards use `var(--color-bg)` (`#faf9f6`) or `var(--color-bg-neutral)` (`#f0ede6`), `1.5px solid var(--color-border)`, SQUARE corners, NO shadow
+- Hover: `translateY(-2px)` to `-3px` lift only — never a shadow, never a background change
+- `.section--soft` alternates use `var(--color-bg-neutral)` (`#f0ede6`) — the old `#f7f5ff` / `#f8f7ff` lavender is a violation
+- Card titles in Lora; icon containers 44px square with rotating indigo → pink → lavender tints (see Category 5)
+- Step number is a Lora numeral, `var(--color-primary)` — not a circular gradient badge
 
-**DARK TRUST SECTION ("Why CustomGPT"):**
-- Dark navy background: `linear-gradient(135deg, #0f0e2e 0%, #1e1b4b 100%)`
-- Left column: eyebrow (eyebrow--light), H2 white, blockquote, award badge + partner logos
-- Right column: 2 why-cards (semi-transparent white surface, with heading + body + link)
-- Partner logos: Anthropic, OpenAI, Amazon, Meta, Microsoft, Cohere — from `wp-content/uploads/2024/11/`
+**DARK SECTIONS (Security, Final CTA):**
+- Background: `var(--color-bg-dark)` (`#0a0a1a`) with the canonical paper `background-image` (e.g. `dark-blue-background-paper.webp`)
+- FLAG the retired navy gradient `linear-gradient(135deg, #0f0e2e 0%, #1e1b4b 100%)` and the `#0f0e2e` / `#1e1b4b` values
+- Text: `--color-on-dark` `#fff`, muted `rgba(255,255,255,.75)`, accent `--color-on-dark-accent` `#a5b4fc`
+- Cards: `rgba(255,255,255,.05)` fill, `1px solid rgba(255,255,255,.08)` border, square, no shadow
 
-**TESTIMONIALS:**
-- White background
-- Horizontal infinite scroll (same CSS mask pattern as proof bar)
-- Cards: white bg, 5-star rating, company logo, quote, avatar photo + name + role
-- Avatar: real headshot (44px circle, `border-radius: 50%`) — NOT initials-only except where photo genuinely unavailable
+**TESTIMONIAL (`.tm-wrap`):**
+- `var(--color-bg)` fill, `1.5px solid var(--color-border)` border, square, no shadow
+- Quote in Lora italic; no decorative quotation-mark characters
+- Avatar (`.tm-wrap__av`): 42px SQUARE — `1.5px solid var(--color-border)`, NOT a circle. FLAG `border-radius: 50%` on avatars.
 
 **MID-PAGE CTA:**
-- Background: `var(--color-bg-soft)` = `#f8f7ff`
-- `border-top` and `border-bottom` in border color
-- Centered: eyebrow → H3 → descriptor → CTA group (primary + ghost)
-- Uses `.btn--primary` + `.btn--ghost` — NOT the hero pink
+- Use `.section--soft` (`var(--color-bg-neutral)` `#f0ede6`) — NOT the retired `#f8f7ff`/`--color-bg-soft`, not white
+- Centered: eyebrow → H2/H3 → descriptor → `.btn-group` (one `.btn--primary` + one `.btn--ghost`) — NOT a pink/gradient button
 
 **PRICING:**
-- White background
-- 3 cards: Standard ($99/mo), Premium ($499/mo, featured), Enterprise (Custom)
-- Monthly/Annual toggle with `pricing__toggle-btn` classes
-- Featured card: distinct from others (usually outlined or filled with indigo)
-- All plan CTAs: "Try free for 7 days" (Standard/Premium) or "Book a demo" (Enterprise)
+- 3 cards: Standard ($99/mo), Premium ($499/mo, featured), Enterprise (Custom), square corners, no shadow
+- Featured ("Most Popular") plan CTA uses `.btn--primary` (solid indigo); ALL other plan CTAs are `.btn--ghost` secondaries — even when the action is "Try free for 7 days"
 - Annual pricing: Standard $89/mo ($1,068/yr), Premium $449/mo ($5,388/yr)
 
 **FAQ:**
-- White background
-- Accordion: `faq-question` button with `aria-expanded` and `aria-controls`
+- `.section--soft` background; accordion `.faq-q` trigger with `aria-expanded`
 - FAQ content must match the JSON-LD `FAQPage` schema verbatim — not paraphrased
 - Placed AFTER pricing to handle objections at the decision point
 
 **FINAL CTA (bottom of page):**
-- Navy or dark background
-- Centered: headline → descriptor → pink hero CTA (repeat the hero button here)
-- Friction microcopy below CTA
+- Dark section: `var(--color-bg-dark)` `#0a0a1a` + canonical paper background-image (not the navy gradient)
+- Centered: eyebrow → H2 → descriptor → primary `.btn--hero` (solid indigo, square, no shadow) → friction microcopy
 
 **FOOTER:**
-- Background: `#faf8ff` or near-white; distinct from body
-- Multi-column: logo left, link columns, social links
-- Low-opacity text for legal/secondary items
+- `border-top: 1.5px solid var(--color-border)`; bg is the page bg `var(--color-bg)` (`#faf9f6`) — FLAG the old `#faf8ff`
+- Logo left, link columns, copy; muted text for legal/secondary items
 
 **Checks:**
 1. Does the hero use the background image from the wp-content CDN (not a solid color or unrelated gradient)?
-2. Is the proof bar immediately after the hero — before any product explanation?
+2. Is the proof bar immediately after / inside the hero — before any product explanation?
 3. Do logos in the proof bar use grayscale + opacity with CSS mask-image edge fade (not overlay divs)?
-4. Does the dark trust/why section use the navy gradient background — not pure black or a non-brand dark?
-5. Are testimonial cards using real headshot photos (not initials placeholders where photos exist in the CDN)?
-6. Is the mid-page CTA using the soft lavender background — not white (same as surrounding sections) or navy (reserved for Why section)?
-7. Are pricing figures correct: Standard $99/mo, Premium $499/mo, Enterprise Custom?
-8. Does the FAQ accordion content match the homepage JSON-LD schema verbatim (not paraphrased)?
-9. Is there a distinct footer that visually separates from the page body?
+4. Do dark sections use `var(--color-bg-dark)` `#0a0a1a` + the canonical paper background-image? FLAG the retired navy gradient `#0f0e2e → #1e1b4b`.
+5. Are testimonial/card surfaces `#faf9f6` or `#f0ede6` with a `#b8b2a8` border, square corners, and NO shadow? FLAG pure-white card backgrounds and any card shadow.
+6. Are avatars SQUARE (`border-radius: 0`)? FLAG any `border-radius: 50%` on an avatar or image.
+7. Are `.section--soft` alternates using `var(--color-bg-neutral)` `#f0ede6`? FLAG `#f7f5ff` / `#f8f7ff` / `--color-bg-soft`.
+8. Is the mid-page CTA on `--color-bg-neutral` and using `.btn--primary` + `.btn--ghost` (not a pink/gradient button)?
+9. Are pricing figures correct (Standard $99/mo, Premium $499/mo, Enterprise Custom), with featured = `.btn--primary` and all others = `.btn--ghost`?
+10. Does the FAQ accordion content match the homepage JSON-LD schema verbatim (not paraphrased)?
+11. Is there a distinct footer with `border-top` separating it from the page body, on the page bg (not `#faf8ff`)?
 
 ---
 

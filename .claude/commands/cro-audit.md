@@ -200,7 +200,7 @@ List EVERY CTA on the page in a table — nav, hero, mid-page, section-level, fo
 - Matches visitor's awareness stage?
 - Is there a micro-commitment ladder?
 - What is the actual friction cost of clicking this?
-- Risk reversal nearby? ("No credit card required," "Cancel anytime," "Free for 7 days") — must be immediately adjacent, not elsewhere on the page.
+- Risk reversal nearby? ("7-day free trial · Cancel anytime") — must be immediately adjacent, not elsewhere on the page. Note: CustomGPT always requires a credit card, so never use "No credit card required."
 - Does the CTA text communicate what happens next, or just what to do?
 
 **CTA hierarchy:**

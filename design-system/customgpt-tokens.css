@@ -1,0 +1,146 @@
+/*
+ * CustomGPT Design System — Token Source of Truth
+ * Primary source: membership-organizations.html
+ * Secondary source: index-paper-blue.html
+ * Last reconciled: 2026-06-08
+ *
+ * CONFLICTS RESOLVED (primary source wins):
+ *   --color-bg:         #faf9f6  (pb had #ffffff — overridden)
+ *   --color-bg-neutral: #f0ede6  (pb had #f9fafb — overridden)
+ *   --color-border:     #b8b2a8  (pb had #e5e7eb — overridden)
+ *   --section-y:        88px     (pb had 96px — overridden)
+ *   --color-primary and --color-primary-hover: aligned with pb values (2026-05-28)
+ *
+ * DESIGN CHOICES (see CUSTOMGPT_DESIGN_SYSTEM.md § Design Decisions):
+ *   Shadow: always none.  Radius: always none (square corners everywhere).
+ *   Both are enforced by the global reset with !important, which is required to
+ *   override the shadow / rounded-corner rules injected by the WP parent theme.
+ */
+
+:root {
+
+  /* ============================================================
+     BRAND COLORS
+  ============================================================ */
+
+  /* Primary indigo — buttons, links, step numbers, icon strokes */
+  --color-primary:          #7367f0;
+  --color-primary-hover:    #5a52d4;   /* hover state */
+
+  /* Purple — eyebrows, italic accent, stat values, citation badges */
+  --color-purple:           #7c3aed;
+
+  /* Pink — marketing accent */
+  --color-pink:             #EE55FF;
+  --color-pink-hover:       #d93eea;
+
+  /* Star — star ratings */
+  --color-star:             #fbbf24;
+
+  /* Warning — upgrade nudges, billing callouts, non-destructive alerts */
+  --color-warning:          #f97316;   /* orange — icon, text, strong border */
+  --color-warning-dark:     #ea580c;   /* darker orange — hover, emphasis */
+  --color-warning-bg:       #fff7ed;   /* light orange fill */
+  --color-warning-border:   #fb923c;   /* mid orange border */
+
+  /* ============================================================
+     BACKGROUNDS — 3 surface tokens, nothing else
+  ============================================================ */
+  --color-bg:               #faf9f6;   /* page base — warm off-white */
+  --color-bg-neutral:       #f0ede6;   /* secondary cards, step cards, section alternates */
+  --color-bg-dark:          #0a0a1a;   /* dark sections — security, final CTA */
+
+  /* ============================================================
+     TEXT — 2 levels only
+  ============================================================ */
+  --color-text:             #111827;   /* all primary text: headlines, body, card text */
+  --color-text-muted:       #4b5563;   /* all secondary text: labels, captions, supporting copy */
+
+  /* ============================================================
+     ON-DARK SURFACES — text/accents on dark sections (security, final CTA)
+  ============================================================ */
+  --color-on-dark:          #ffffff;              /* primary text on dark bg */
+  --color-on-dark-muted:    rgba(255,255,255,.75);/* secondary text on dark bg */
+  --color-on-dark-accent:   #a5b4fc;              /* eyebrow / accent on dark bg (light indigo) */
+
+  /* ============================================================
+     BORDERS
+  ============================================================ */
+  --color-border:           #b8b2a8;   /* standard — warm tan */
+  --color-border-soft:      #ede9fe;   /* soft lavender (light bg only, rare) */
+
+  /* ============================================================
+     GHOST BUTTON
+  ============================================================ */
+  --btn-ghost-border:       #b8b2a8;   /* warm tan default border */
+  --btn-ghost-text:         #111827;   /* near-black text */
+  --btn-ghost-border-hover: #111827;   /* black border on hover */
+  --btn-ghost-bg-hover:     #f0ede6;   /* muted neutral fill on hover */
+
+  /* ============================================================
+     RADIUS — always none. Square corners everywhere. No radius tokens.
+     Enforced by the global reset: border-radius: 0 !important
+     (!important overrides the WP parent theme when it conflicts).
+  ============================================================ */
+
+  /* ============================================================
+     SHADOW — always none. No box shadows. No shadow tokens.
+     Enforced by the global reset: box-shadow: none !important
+     (!important overrides the WP parent theme when it conflicts).
+  ============================================================ */
+
+  /* ============================================================
+     TYPOGRAPHY
+  ============================================================ */
+  --font:                   'Inter', system-ui, sans-serif;
+  --font-serif:             'Lora', Georgia, serif;
+
+  /* Type scale — body/UI sizes. Headings use clamp() in .h1–.h3 classes. */
+  --text-xs:    11px;   /* timestamps, smallest labels */
+  --text-sm:    12px;   /* badges, meta, secondary roles */
+  --text-ui:    13px;   /* UI text, small buttons, captions, eyebrows */
+  --text-base:  14px;   /* card body, feature descriptions */
+  --text-md:    15px;   /* list items, base button text */
+  --text-body:  16px;   /* page body base */
+  --text-lg:    18px;   /* section subtitles, hero button text */
+  --text-xl:    20px;   /* hero desc, stat values */
+
+  /* ============================================================
+     SPACING SCALE (4-base)
+  ============================================================ */
+  --sp1:  4px;
+  --sp2:  8px;
+  --sp3:  12px;
+  --sp4:  16px;
+  --sp5:  24px;
+  --sp6:  32px;
+  --sp7:  48px;
+
+  /* ============================================================
+     LAYOUT
+  ============================================================ */
+  --max-w:         1200px;   /* page container max-width */
+  --w-hero:         900px;   /* hero content column */
+  --w-prose:        760px;   /* long-form text container */
+  --w-tight:        560px;   /* narrow modals, narrow CTAs */
+  --section-y:       88px;   /* standard section vertical padding */
+  --section-y-sm:    64px;   /* compact section padding */
+  --section-y-lg:   120px;   /* spacious section padding */
+
+  /* ============================================================
+     MOTION
+  ============================================================ */
+  --trans-fast:  0.15s ease;   /* hover state changes, icon reveals */
+  --trans-base:  0.2s ease;    /* button transforms, color changes */
+  --trans-slow:  0.3s ease;    /* panel slides, drawer opens */
+
+  /* ============================================================
+     Z-INDEX SCALE
+  ============================================================ */
+  --z-base:      1;
+  --z-raised:    10;
+  --z-dropdown:  50;
+  --z-nav:       100;
+  --z-modal:     200;
+  --z-toast:     300;
+}
