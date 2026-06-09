@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CustomGPT Design System — Style Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111827; --muted:#4b5563;
+    --rule:#b8b2a8; --soft:#f5f2eb; --neutral:#f0ede6; --page:#faf9f6;
+    --primary:#7367f0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.55;font-size:12px;}
+
+  /* ---- Page layout for print ---- */
+  @page{size:Letter;margin:14mm 14mm 16mm 14mm;}
+  .sheet{max-width:780px;margin:0 auto;padding:0;}
+
+  h1,h2,h3,h4{font-family:'Lora',Georgia,serif;color:var(--ink);}
+  h1{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.1;}
+  h2{font-size:21px;font-weight:700;letter-spacing:-.015em;margin:0 0 4px;}
+  h3{font-size:15px;font-weight:600;margin:0 0 6px;}
+  p{margin:0 0 8px;}
+  code,.mono{font-family:'SF Mono',Consolas,'Courier New',monospace;font-size:11px;}
+
+  /* ---- Cover ---- */
+  .cover{padding:60px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:26px;}
+  .cover .eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:14px;}
+  .cover h1{margin-bottom:14px;}
+  .cover .lead{font-size:15px;color:var(--muted);max-width:560px;}
+  .cover .meta{margin-top:22px;font-size:11px;color:#9ca3af;}
+  .cover .meta strong{color:var(--muted);font-weight:600;}
+
+  /* ---- Section ---- */
+  section{margin-bottom:30px;}
+  .sec-head{display:flex;align-items:baseline;gap:10px;border-bottom:1.5px solid var(--rule);padding-bottom:6px;margin-bottom:14px;}
+  .sec-head .num{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);opacity:.5;line-height:1;}
+  .sec-intro{font-size:11.5px;color:var(--muted);margin-bottom:14px;max-width:640px;}
+
+  /* ---- Fundamental rule callouts ---- */
+  .rules{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;}
+  .rule-card{border:1.5px solid var(--ink);padding:12px 14px;background:var(--soft);}
+  .rule-card .tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);}
+  .rule-card .body{font-size:11.5px;color:var(--ink);margin-top:3px;}
+
+  /* ---- Color swatches ---- */
+  .swatch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .swatch{border:1.5px solid var(--rule);overflow:hidden;break-inside:avoid;}
+  .swatch .chip{height:62px;width:100%;border-bottom:1.5px solid var(--rule);}
+  .swatch .info{padding:7px 9px;background:#fff;}
+  .swatch .name{font-size:11px;font-weight:700;color:var(--ink);line-height:1.25;}
+  .swatch .hex{font-family:'SF Mono',Consolas,monospace;font-size:11px;color:var(--muted);text-transform:uppercase;margin-top:2px;}
+  .swatch .token{font-family:'SF Mono',Consolas,monospace;font-size:9.5px;color:#9ca3af;margin-top:1px;}
+  .swatch .use{font-size:9.5px;color:var(--muted);margin-top:4px;line-height:1.35;}
+
+  .group-label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:16px 0 8px;}
+
+  /* checkerboard for transparency */
+  .checker{background-image:linear-gradient(45deg,#ddd 25%,transparent 25%),linear-gradient(-45deg,#ddd 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#ddd 75%),linear-gradient(-45deg,transparent 75%,#ddd 75%);background-size:14px 14px;background-position:0 0,0 7px,7px -7px,-7px 0;}
+
+  /* ---- Typography specimens ---- */
+  .type-row{display:flex;align-items:baseline;gap:16px;padding:9px 0;border-bottom:1px solid var(--rule);break-inside:avoid;}
+  .type-row:last-child{border-bottom:none;}
+  .type-spec{flex:0 0 150px;font-size:10px;color:var(--muted);line-height:1.4;}
+  .type-spec .role{font-weight:700;color:var(--ink);font-size:10.5px;display:block;}
+  .type-sample{flex:1;}
+  .serif{font-family:'Lora',Georgia,serif;}
+
+  table{width:100%;border-collapse:collapse;font-size:10.5px;}
+  th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);vertical-align:top;}
+  th{font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;border-bottom:1.5px solid var(--ink);}
+  td.mono,th.mono{font-family:'SF Mono',Consolas,monospace;}
+
+  /* ---- Buttons preview ---- */
+  .btn-demo{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:16px;border:1.5px solid var(--rule);background:var(--page);margin-bottom:10px;}
+  .btn-demo.dark{background:#0a0a1a;border-color:#0a0a1a;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-family:'Inter';font-size:13px;font-weight:600;border:1.5px solid #111827;cursor:pointer;}
+  .btn--hero{background:#7367f0;color:#fff;font-weight:700;}
+  .btn--primary{background:#7367f0;color:#fff;}
+  .btn--ghost{background:transparent;color:#111827;border:1.5px solid #b8b2a8;}
+  .btn--ghost-light{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4);}
+  .btn-note{font-size:10px;color:#9ca3af;margin-top:-4px;}
+
+  /* ---- Icon tints ---- */
+  .icon-row{display:flex;gap:18px;align-items:flex-start;}
+  .icon-demo{text-align:center;}
+  .icon-box{width:44px;height:44px;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;}
+  .icon-demo .lbl{font-size:10px;font-weight:600;color:var(--ink);}
+  .icon-demo .sub{font-family:'SF Mono',monospace;font-size:9px;color:var(--muted);}
+
+  /* spacing scale */
+  .scale-row{display:flex;align-items:center;gap:12px;padding:4px 0;border-bottom:1px solid var(--rule);font-size:10.5px;}
+  .scale-row:last-child{border-bottom:none;}
+  .scale-token{flex:0 0 70px;font-family:'SF Mono',monospace;font-weight:700;color:var(--ink);}
+  .scale-val{flex:0 0 50px;font-family:'SF Mono',monospace;color:var(--muted);}
+  .scale-bar{height:14px;background:var(--primary);}
+
+  .audit-list{font-size:11px;color:var(--ink);}
+  .audit-list li{padding:6px 0 6px 22px;border-bottom:1px solid var(--rule);position:relative;list-style:none;break-inside:avoid;}
+  .audit-list li:before{content:"\2713";position:absolute;left:0;color:var(--primary);font-weight:700;}
+  .audit-list li:last-child{border-bottom:none;}
+  .audit-list strong{font-weight:700;}
+
+  .page-break{page-break-before:always;}
+  .footer-note{margin-top:30px;padding-top:12px;border-top:1.5px solid var(--rule);font-size:10px;color:#9ca3af;}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- ===================== COVER ===================== -->
+  <div class="cover">
+    <div class="eyebrow">CustomGPT.ai · Design System</div>
+    <h1>Brand &amp; Design Style Guide</h1>
+    <p class="lead">The human-readable reference for design audits across CustomGPT.ai pages. Colors, type, components, and the non-negotiable rules every page must follow.</p>
+    <div class="meta">
+      <strong>Token source of truth:</strong> customgpt-tokens.css &nbsp;·&nbsp;
+      <strong>Primary source page:</strong> membership-organizations.html<br>
+      <strong>Reconciled:</strong> 2026-05-28 &nbsp;·&nbsp; <strong>Generated:</strong> 2026-06-08
+    </div>
+  </div>
+
+  <!-- ===================== FOUNDATIONAL RULES ===================== -->
+  <section>
+    <div class="sec-head"><span class="num">00</span><h2>The Two Hard Rules</h2></div>
+    <p class="sec-intro">These override everything. If a design breaks either rule, it is off-brand.</p>
+    <div class="rules">
+      <div class="rule-card">
+        <div class="tag">Shadow</div>
+        <div class="body"><strong>Always no shadow.</strong> Nothing on the site casts a shadow.</div>
+      </div>
+      <div class="rule-card">
+        <div class="tag">Radius</div>
+        <div class="body"><strong>Always no radius.</strong> Square corners everywhere.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COLORS ===================== -->
+  <section>
+    <div class="sec-head"><span class="num">01</span><h2>Color Palette</h2></div>
+    <p class="sec-intro">Every color on the site maps to a token below. Any hex not listed here requires operator approval before use.</p>
+
+    <div class="group-label">Brand — Primary</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:#7367f0"></div><div class="info"><div class="name">Primary Indigo</div><div class="hex">#7367F0</div><div class="token">--color-primary</div><div class="use">Buttons, links, step numbers, icon strokes</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#5a52d4"></div><div class="info"><div class="name">Primary Hover</div><div class="hex">#5A52D4</div><div class="token">--color-primary-hover</div><div class="use">Button hover state</div></div></div>
+    </div>
+
+    <div class="group-label">Purple</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:#7c3aed"></div><div class="info"><div class="name">Purple</div><div class="hex">#7C3AED</div><div class="token">--color-purple</div><div class="use">Eyebrows, italic accent, stat values, citation badges</div></div></div>
+    </div>
+
+    <div class="group-label">Pink</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:#EE55FF"></div><div class="info"><div class="name">Pink</div><div class="hex">#EE55FF</div><div class="token">--color-pink</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#d93eea"></div><div class="info"><div class="name">Pink Hover</div><div class="hex">#D93EEA</div><div class="token">--color-pink-hover</div></div></div>
+    </div>
+
+    <div class="group-label">Backgrounds</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:#faf9f6"></div><div class="info"><div class="name">Page Base</div><div class="hex">#FAF9F6</div><div class="token">--color-bg</div><div class="use">Warm off-white — page background</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#f0ede6"></div><div class="info"><div class="name">Neutral</div><div class="hex">#F0EDE6</div><div class="token">--color-bg-neutral</div><div class="use">Secondary cards, step cards</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#0a0a1a"></div><div class="info"><div class="name">Dark</div><div class="hex">#0A0A1A</div><div class="token">--color-bg-dark</div><div class="use">Security, final CTA sections</div></div></div>
+    </div>
+
+    <div class="group-label">Text — 2 levels only</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:#111827"></div><div class="info"><div class="name">Text</div><div class="hex">#111827</div><div class="token">--color-text</div><div class="use">All primary: headlines, body, card text</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#4b5563"></div><div class="info"><div class="name">Text Muted</div><div class="hex">#4B5563</div><div class="token">--color-text-muted</div><div class="use">All secondary: labels, captions, support copy</div></div></div>
+    </div>
+
+    <div class="group-label">Borders</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:#b8b2a8"></div><div class="info"><div class="name">Border</div><div class="hex">#B8B2A8</div><div class="token">--color-border</div><div class="use">Standard — warm tan. The default border everywhere.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#ede9fe"></div><div class="info"><div class="name">Border Soft</div><div class="hex">#EDE9FE</div><div class="token">--color-border-soft</div><div class="use">Soft lavender (light bg only, rare)</div></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== TYPOGRAPHY ===================== -->
+  <section class="page-break">
+    <div class="sec-head"><span class="num">02</span><h2>Typography</h2></div>
+    <p class="sec-intro">Two families only. <strong>Lora</strong> (serif) for all headings &amp; quotes; <strong>Inter</strong> (sans) for everything else. Headings always use the <span class="mono">.h1 / .h2 / .h3</span> classes — never a custom font-size-only class.</p>
+
+    <div class="type-row">
+      <div class="type-spec"><span class="role">H1 · Page heading</span>Lora 700 · clamp 38–58px · line 1.08</div>
+      <div class="type-sample"><span class="serif" style="font-size:38px;font-weight:700;letter-spacing:-.02em;line-height:1.05;">Build AI agents fast</span></div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><span class="role">H2 · Section heading</span>Lora 700 · clamp 28–44px · line 1.1</div>
+      <div class="type-sample"><span class="serif" style="font-size:28px;font-weight:700;letter-spacing:-.015em;">Why teams choose us</span></div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><span class="role">H3 · Subsection</span>Lora 600 · clamp 17–22px · line 1.25</div>
+      <div class="type-sample"><span class="serif" style="font-size:20px;font-weight:600;">A faster way to deploy</span></div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><span class="role">Eyebrow</span>Inter 700 · 13px · UPPERCASE · indigo · tracking .08em</div>
+      <div class="type-sample"><span style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7367f0;">Section label</span></div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><span class="role">Lead / subheadline</span>Inter 400 · clamp 16–20px · muted · line 1.65</div>
+      <div class="type-sample"><span style="font-size:18px;color:#4b5563;">Supporting description that sits under a heading. One or two sentences.</span></div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><span class="role">Block quote / testimonial</span>Lora 400 · clamp 17–21px · <em>italic</em></div>
+      <div class="type-sample"><span class="serif" style="font-size:19px;font-style:italic;color:#111827;">It cut our support volume in half within two weeks.</span></div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><span class="role">Display stat value</span>Lora 700 · clamp 36–52px · indigo</div>
+      <div class="type-sample"><span class="serif" style="font-size:42px;font-weight:700;color:#7367f0;line-height:1;">88%</span></div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><span class="role">Display price number</span>Inter 900 · clamp 32–42px</div>
+      <div class="type-sample"><span style="font-size:38px;font-weight:900;color:#111827;line-height:1;">$99</span></div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><span class="role">Body text</span>Inter 400 · 16px · line 1.6</div>
+      <div class="type-sample"><span style="font-size:14px;color:#111827;">Standard body copy. Inter regular at the base body size, used for paragraphs and card descriptions.</span></div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><span class="role">Microcopy / friction</span>Inter 400 · 11px · muted</div>
+      <div class="type-sample"><span style="font-size:11px;color:#4b5563;">7-day free trial · Cancel anytime</span></div>
+    </div>
+
+    <h3 style="margin:18px 0 6px;">Type scale (body &amp; UI sizes)</h3>
+    <table>
+      <tr><th class="mono">Token</th><th class="mono">Size</th><th>Use</th></tr>
+      <tr><td class="mono">--text-xs</td><td class="mono">11px</td><td>Timestamps, smallest labels, friction microcopy</td></tr>
+      <tr><td class="mono">--text-sm</td><td class="mono">12px</td><td>Badges, meta, secondary roles</td></tr>
+      <tr><td class="mono">--text-ui</td><td class="mono">13px</td><td>UI text, small buttons, captions, eyebrows</td></tr>
+      <tr><td class="mono">--text-base</td><td class="mono">14px</td><td>Card body, feature descriptions</td></tr>
+      <tr><td class="mono">--text-md</td><td class="mono">15px</td><td>List items, base button text</td></tr>
+      <tr><td class="mono">--text-body</td><td class="mono">16px</td><td>Page body base</td></tr>
+      <tr><td class="mono">--text-lg</td><td class="mono">18px</td><td>Section subtitles, hero button text</td></tr>
+      <tr><td class="mono">--text-xl</td><td class="mono">20px</td><td>Hero description, stat values</td></tr>
+    </table>
+
+    <h3 style="margin:16px 0 6px;">Rules</h3>
+    <ul class="audit-list">
+      <li>Italic is valid <strong>only</strong> for block quotes / testimonials (Lora family only).</li>
+      <li>Uppercase is valid <strong>only</strong> for eyebrows and plan/card tier labels.</li>
+      <li>Weight 900 is valid <strong>only</strong> for the plan price display number; weight 800 only for secondary (add-on) price numbers.</li>
+      <li>Never use em dashes in any copy. No decorative quotation-mark characters in testimonials.</li>
+    </ul>
+  </section>
+
+  <!-- ===================== BUTTONS ===================== -->
+  <section class="page-break">
+    <div class="sec-head"><span class="num">03</span><h2>Buttons &amp; CTAs</h2></div>
+    <p class="sec-intro">Every CTA is either <strong>primary</strong> (filled indigo) or <strong>secondary</strong> (ghost / outlined). In any two-CTA group: exactly one primary, one secondary. The secondary is always ghost — chosen by background, not by action type. <strong>No button ever carries an arrow</strong> (arrows belong only to inline text links).</p>
+
+    <div class="group-label">On light backgrounds</div>
+    <div class="btn-demo">
+      <span class="btn btn--hero">Book a consultation</span>
+      <span class="btn btn--primary">Start free trial</span>
+      <span class="btn btn--ghost">Talk to sales</span>
+    </div>
+    <p class="btn-note">btn--hero (primary, hero + bottom CTA) · btn--primary (standard primary) · btn--ghost (secondary: transparent fill, #111827 text, 1.5px #B8B2A8 tan border → hover fills #F0EDE6, border goes #111827)</p>
+
+    <div class="group-label">On dark backgrounds</div>
+    <div class="btn-demo dark">
+      <span class="btn btn--hero">Book a consultation</span>
+      <span class="btn btn--ghost-light">View case study</span>
+    </div>
+    <p class="btn-note">btn--ghost-light is the secondary on dark sections: transparent fill, white text, white 40% border → 70% on hover.</p>
+
+    <table style="margin-top:14px;">
+      <tr><th>Variant</th><th>Role</th><th>Where</th></tr>
+      <tr><td class="mono">btn--hero</td><td>Primary</td><td>Hero + bottom CTA positions</td></tr>
+      <tr><td class="mono">btn--primary</td><td>Primary</td><td>Inline / mid-page / featured pricing card</td></tr>
+      <tr><td class="mono">btn--ghost</td><td>Secondary (light bg)</td><td>The secondary action in a pair on a light bg</td></tr>
+      <tr><td class="mono">btn--ghost-light</td><td>Secondary (dark bg)</td><td>The secondary action in a pair on a dark bg</td></tr>
+    </table>
+    <p class="sec-intro" style="margin-top:10px;"><strong>Consistent sizing:</strong> a primary button is the same size whether it stands alone or sits in a button group. A lone primary is never larger than a paired one. <strong>Pricing pattern:</strong> the featured ("Most Popular") plan uses the filled primary; every other plan CTA is a ghost secondary — even when the action is "Try free for 7 days." Shape: all buttons are square (no radius), no shadow, 1.5px border, hover lifts <span class="mono">translateY(-1px)</span>.</p>
+  </section>
+
+  <!-- ===================== ICONS ===================== -->
+  <section>
+    <div class="sec-head"><span class="num">04</span><h2>Icons</h2></div>
+    <p class="sec-intro">Library: <strong>Lucide</strong> — inline SVG only. No icon fonts, no emoji. SVG sized 22×22 inside a 44×44 container. Within any section the tint rotates so no two adjacent icons share a color.</p>
+    <div class="icon-row">
+      <div class="icon-demo">
+        <div class="icon-box" style="background:rgba(115,103,240,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7367f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div class="lbl">Indigo</div><div class="sub">stroke #7367F0<br>bg rgba(115,103,240,.12)</div>
+      </div>
+      <div class="icon-demo">
+        <div class="icon-box" style="background:rgba(238,85,255,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EE55FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="lbl">Pink</div><div class="sub">stroke #EE55FF<br>bg rgba(238,85,255,.12)</div>
+      </div>
+      <div class="icon-demo">
+        <div class="icon-box" style="background:rgba(167,139,250,.18)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div class="lbl">Lavender</div><div class="sub">stroke #A78BFA<br>bg rgba(167,139,250,.18)</div>
+      </div>
+    </div>
+    <p class="sec-intro" style="margin-top:12px;">Rotation order: <strong>Indigo → Pink → Lavender</strong>, repeating.</p>
+  </section>
+
+  <!-- ===================== SPACING & LAYOUT ===================== -->
+  <section>
+    <div class="sec-head"><span class="num">05</span><h2>Spacing &amp; Layout</h2></div>
+    <div class="group-label">Spacing scale (4px base)</div>
+    <div class="scale-row"><span class="scale-token">--sp1</span><span class="scale-val">4px</span><span class="scale-bar" style="width:4px"></span></div>
+    <div class="scale-row"><span class="scale-token">--sp2</span><span class="scale-val">8px</span><span class="scale-bar" style="width:8px"></span></div>
+    <div class="scale-row"><span class="scale-token">--sp3</span><span class="scale-val">12px</span><span class="scale-bar" style="width:12px"></span></div>
+    <div class="scale-row"><span class="scale-token">--sp4</span><span class="scale-val">16px</span><span class="scale-bar" style="width:16px"></span></div>
+    <div class="scale-row"><span class="scale-token">--sp5</span><span class="scale-val">24px</span><span class="scale-bar" style="width:24px"></span></div>
+    <div class="scale-row"><span class="scale-token">--sp6</span><span class="scale-val">32px</span><span class="scale-bar" style="width:32px"></span></div>
+    <div class="scale-row"><span class="scale-token">--sp7</span><span class="scale-val">48px</span><span class="scale-bar" style="width:48px"></span></div>
+
+    <div class="group-label">Layout widths &amp; section padding</div>
+    <table>
+      <tr><th class="mono">Token</th><th class="mono">Value</th><th>Use</th></tr>
+      <tr><td class="mono">--max-w</td><td class="mono">1200px</td><td>Page container max-width</td></tr>
+      <tr><td class="mono">--w-hero</td><td class="mono">900px</td><td>Hero content column</td></tr>
+      <tr><td class="mono">--w-prose</td><td class="mono">760px</td><td>Long-form text container</td></tr>
+      <tr><td class="mono">--w-tight</td><td class="mono">560px</td><td>Narrow modals / CTAs</td></tr>
+      <tr><td class="mono">--section-y</td><td class="mono">88px</td><td>Standard section vertical padding</td></tr>
+      <tr><td class="mono">--section-y-sm</td><td class="mono">64px</td><td>Compact section padding</td></tr>
+      <tr><td class="mono">--section-y-lg</td><td class="mono">120px</td><td>Spacious section padding</td></tr>
+    </table>
+    <p class="sec-intro" style="margin-top:10px;"><strong>Borders:</strong> sections use <span class="mono">border-bottom: 1.5px solid #B8B2A8</span> only. Never add a top border to a section that follows a bordered section — it doubles the line. <strong>Motion:</strong> hover 0.15s · transforms 0.2s · panels 0.3s, all ease.</p>
+  </section>
+
+  <!-- ===================== COMPONENTS ===================== -->
+  <section class="page-break">
+    <div class="sec-head"><span class="num">06</span><h2>Component Inventory</h2></div>
+    <p class="sec-intro">The approved component blocks. Each has a fixed CSS spec in the master design system doc — audits check that pages use these and nothing custom.</p>
+    <table>
+      <tr><th>Component</th><th>Class</th><th>Notes</th></tr>
+      <tr><td>Navigation</td><td class="mono">.nav</td><td>Sticky, 64px, white bg, 1.5px #111827 bottom border</td></tr>
+      <tr><td>Hero (centered CTA)</td><td class="mono">.hero</td><td>Paper-texture bg image, pill + h1 + lead + CTA, proof bar inside</td></tr>
+      <tr><td>Proof bar</td><td class="mono">.proof-bar</td><td>Infinite logo scroller, grayscale at 55% opacity</td></tr>
+      <tr><td>Stats strip</td><td class="mono">.stats-strip</td><td>Indigo serif values, vertical dividers</td></tr>
+      <tr><td>Value props grid</td><td class="mono">.vp-grid</td><td>3-col cards, rotating icon tints, hover lift -2px</td></tr>
+      <tr><td>Use cases grid</td><td class="mono">.uc-grid</td><td>3-col numbered cards (01, 02…)</td></tr>
+      <tr><td>How it works</td><td class="mono">.steps-grid</td><td>3 steps, large faded serif numbers, optional image</td></tr>
+      <tr><td>Testimonial</td><td class="mono">.tm-wrap</td><td>Italic Lora quote, avatar + name + role</td></tr>
+      <tr><td>Case study hero</td><td class="mono">.cs-hero</td><td>2-col, logo + quote + 4 stat tiles</td></tr>
+      <tr><td>FAQ accordion</td><td class="mono">.faq</td><td>First item open by default, chevron rotates</td></tr>
+      <tr><td>Security (dark)</td><td class="mono">.security</td><td>Dark bg image, 2-col cards, badge row</td></tr>
+      <tr><td>Final CTA (dark)</td><td class="mono">.final-cta</td><td>Pink/dark bg image, overlay, trust badges</td></tr>
+      <tr><td>Footer</td><td class="mono">.footer</td><td>Logo + links + copyright, top border</td></tr>
+    </table>
+
+    <h3 style="margin:16px 0 6px;">Standard page section order</h3>
+    <p class="sec-intro">Nav → Hero (proof bar inside) → Stats strip → [demo] → Trust banner → Value props → Use cases → [resource CTA] → Customer results → How it works → Security (dark) → Testimonial → FAQ → Final CTA (dark) → Footer.</p>
+  </section>
+
+  <!-- ===================== AUDIT CHECKLIST ===================== -->
+  <section>
+    <div class="sec-head"><span class="num">07</span><h2>Design Audit Checklist</h2></div>
+    <p class="sec-intro">Run this against any page. A page passes only if every line is true.</p>
+    <ul class="audit-list">
+      <li><strong>No shadows.</strong> Nothing on the page casts a shadow.</li>
+      <li><strong>Square corners.</strong> No rounded corners anywhere (cards, buttons, inputs, avatars, images).</li>
+      <li><strong>Fonts:</strong> Lora for every heading and quote; Inter for everything else. No third typeface.</li>
+      <li><strong>Headings</strong> use .h1 / .h2 / .h3 classes — no custom font-size-only heading classes.</li>
+      <li><strong>Colors</strong> all map to a token. No stray hex values outside the palette above.</li>
+      <li><strong>Background</strong> is warm off-white #FAF9F6 — not pure white #FFFFFF.</li>
+      <li><strong>Borders</strong> are warm tan #B8B2A8 at 1.5px — not gray #E5E7EB. Bottom-border only on sections.</li>
+      <li><strong>CTAs:</strong> one primary + one secondary per group; secondary is always ghost; chosen by background.</li>
+      <li><strong>Primary size is consistent</strong> — a lone primary is no larger than a paired one.</li>
+      <li><strong>No arrows on buttons.</strong> Arrows only on inline .text-link discovery links.</li>
+      <li><strong>Icons</strong> are Lucide inline SVG, 22px in a 44px box, tints rotating indigo → pink → lavender.</li>
+      <li><strong>Spacing</strong> values sit on the 4px scale (4 / 8 / 12 / 16 / 24 / 32 / 48).</li>
+      <li><strong>No em dashes</strong> in any copy. Friction line reads "7-day free trial · Cancel anytime", never "No credit card".</li>
+    </ul>
+  </section>
+
+  <div class="footer-note">
+    CustomGPT.ai Design System Style Guide · Generated 2026-06-08 from customgpt-tokens.css and CUSTOMGPT_DESIGN_SYSTEM.md. Any color, size, radius, shadow, or component not defined here requires operator approval before use. Token source of truth: customgpt-design-system/customgpt-tokens.css.
+  </div>
+
+</div>
+</body>
+</html>

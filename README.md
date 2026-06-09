@@ -97,19 +97,32 @@ Verifies tracking implementation: GA4 events, conversion tracking, UTM handling,
 
 ---
 
-## Design System Quick Reference
+## Design System
+
+The canonical design system lives in [`design-system/`](design-system/). It is the single source of truth — every skill in this repo defers to it.
+
+- **[`CUSTOMGPT_DESIGN_SYSTEM.md`](design-system/CUSTOMGPT_DESIGN_SYSTEM.md)** — full spec: tokens, typography, button system, component blocks, page skeleton, WordPress publishing
+- **[`customgpt-tokens.css`](design-system/customgpt-tokens.css)** — token source of truth
+- **[`STYLE_GUIDE.html`](design-system/STYLE_GUIDE.html)** / **[`CustomGPT-Style-Guide.pdf`](design-system/CustomGPT-Style-Guide.pdf)** — human-readable style guide for design audits
+- **[`COMPONENT_INDEX.md`](design-system/COMPONENT_INDEX.md)** — component inventory
+- **[`lint-tokens.js`](design-system/lint-tokens.js)** — token lint enforcer (no raw hex or bare px outside `:root`)
 
 All brand values are enforced inside `/customgpt-page-builder`. Key rules:
 
 | Element | Value |
 |---|---|
-| Font | Inter only (Google Fonts, weights 300–900) |
+| Headings | Lora (serif), weights 600–700 |
+| Body / UI | Inter, weights 300–900 |
+| Primary color | Indigo `#7367f0` (`--color-primary`); hover `#5a52d4` (`--color-primary-hover`) |
+| Buttons | Primary = solid indigo fill; secondary = ghost/outline. Square corners, no shadow, 1.5px border, no arrows |
+| Pink | Marketing accent only (`#EE55FF`) — never a button fill |
+| Corners | Square everywhere — `border-radius: 0` (no radius tokens) |
+| Shadows | None anywhere — `box-shadow: none` (no shadow tokens) |
+| Page background | Warm off-white `#faf9f6` (never pure white) |
+| Borders | Warm tan `#b8b2a8`, 1.5px |
 | Container max-width | 1200px |
 | Mobile breakpoint | 768px |
-| Hero CTA | Pink gradient pill (`#EE55FF → #c026d3`) — hero + final CTA only |
-| In-page CTAs | Blue-dark → periwinkle gradient (`#602ffc → #7E76FF`) |
-| Nav/mid-page CTAs | Solid indigo (`#5046e5`) |
-| Friction copy | `7-day free trial · Cancel anytime` — always adjacent to CTAs |
+| Friction copy | `7-day free trial · Cancel anytime` — always adjacent to CTAs (never "No credit card") |
 
 ---
 

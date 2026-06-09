@@ -1,0 +1,229 @@
+<!--
+  COMPONENT: Proof Bar — infinite logo scroller
+  SOURCE OF TRUTH: customgpt-homepage/index.html
+  LAST UPDATED: 2026-04-24
+
+  HOW TO COPY TO A NEW PAGE
+  ─────────────────────────
+  1. Copy the <style> block into the page's <style> section.
+  2. Copy the <section class="proof-bar"> block into the HTML where needed
+     (drop directly after the hero, or wherever social proof is required).
+  3. All images are served from the CustomGPT CDN — no local assets needed.
+  4. Set 2 is an exact duplicate of Set 1 for the seamless loop.
+     It uses aria-hidden="true" so screen readers skip it.
+     Do NOT remove Set 2 — the loop breaks without it.
+
+  IMAGE INVENTORY (13 logos — all from CDN)
+  ──────────────────────────────────────────
+  These are the only images this component uses. Copy all 13 into both sets.
+
+  1.  university-of-virginia-logo-color.svg  | alt: University of Virginia
+  2.  united-nations-logo-color.svg          | alt: United Nations
+  3.  mit-logo-color.svg                     | alt: MIT — Massachusetts Institute of Technology  | link: /customer/chatmtc-mit-entrepreneurship/
+  4.  medtronic-logo-color.svg               | alt: Medtronic
+  5.  lehigh-university-logo-color.svg       | alt: Lehigh University                           | link: /customer/lehigh-university-the-brown-and-white/
+  6.  ismg-logo-color.svg                    | alt: ISMG — Information Security Media Group
+  7.  icfj-logo-color.svg                    | alt: ICFJ — International Center for Journalists
+  8.  gema-logo-color.svg                    | alt: GEMA                                        | link: /customer/gema/
+  9.  dropbox-logo-color.svg                 | alt: Dropbox
+  10. biamp-logo-color.svg                   | alt: Biamp                                       | link: /customer/biamp/
+  11. bqe-logo-color.svg                     | alt: BQE Software                                | link: /customer/bqe/
+  12. alpa-logo-color.svg                    | alt: ALPA — Air Line Pilots Association
+  13. adobe-logo-color.svg                   | alt: Adobe
+
+  CDN base: https://customgpt.ai/wp-content/uploads/2026/04/
+
+  Loop mechanics:
+  - Track animates translateX(-50%) — requires exactly two identical sets
+  - Set 1: role="list", each item role="listitem", descriptive alt text, real links
+  - Set 2: aria-hidden="true", empty alt text, links get tabindex="-1"
+  - Hover pauses; prefers-reduced-motion disables animation
+-->
+
+<style>
+  .proof-bar {
+    background: var(--color-bg);
+    padding: 40px 0;
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+  .proof-bar__label {
+    text-align: center;
+    font-size: var(--text-ui);
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 28px;
+  }
+  .proof-bar__viewport {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0px,
+      #000 130px,
+      #000 calc(100% - 130px),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0px,
+      #000 130px,
+      #000 calc(100% - 130px),
+      transparent 100%
+    );
+    overflow: hidden;
+  }
+  .proof-bar__track {
+    display: flex;
+    width: max-content;
+    animation: logoScroll 48s linear infinite;
+    will-change: transform;
+  }
+  .proof-bar__track:hover { animation-play-state: paused; }
+  .proof-bar__set {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    padding: 0 1px;
+    flex-shrink: 0;
+  }
+  .proof-bar__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    flex-shrink: 0;
+    filter: grayscale(1);
+    opacity: 0.55;
+    transition: opacity var(--transition-base), filter var(--transition-base);
+  }
+  .proof-bar__logo:hover { opacity: 1; filter: grayscale(0); }
+  .proof-bar__logo img {
+    height: 100%;
+    width: auto;
+    max-width: 320px;
+    object-fit: contain;
+    display: block;
+  }
+  .proof-bar__logo a { display: flex; align-items: center; justify-content: center; height: 100%; text-decoration: none; }
+  @keyframes logoScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .proof-bar__track { animation: none; }
+  }
+</style>
+
+<section class="proof-bar" aria-label="Trusted by organizations worldwide">
+  <p class="proof-bar__label">Trusted by 10,000+ organizations worldwide</p>
+  <div class="proof-bar__viewport">
+    <div class="proof-bar__track" role="list" aria-label="Customer logos">
+
+      <!-- Set 1 — accessible (role, alt text, real links) -->
+      <div class="proof-bar__set">
+        <div class="proof-bar__logo" role="listitem">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/university-of-virginia-logo-color.svg" alt="University of Virginia" height="36" />
+        </div>
+        <div class="proof-bar__logo" role="listitem">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/united-nations-logo-color.svg" alt="United Nations" height="36" />
+        </div>
+        <div class="proof-bar__logo" role="listitem">
+          <a href="https://customgpt.ai/customer/chatmtc-mit-entrepreneurship/" target="_blank" rel="noopener noreferrer" data-cta-type="customers" data-cta-location="trust-bar">
+            <img src="https://customgpt.ai/wp-content/uploads/2026/04/mit-logo-color.svg" alt="MIT — Massachusetts Institute of Technology" height="36" />
+          </a>
+        </div>
+        <div class="proof-bar__logo" role="listitem">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/medtronic-logo-color.svg" alt="Medtronic" height="36" />
+        </div>
+        <div class="proof-bar__logo" role="listitem">
+          <a href="https://customgpt.ai/customer/lehigh-university-the-brown-and-white/" target="_blank" rel="noopener noreferrer" data-cta-type="customers" data-cta-location="trust-bar">
+            <img src="https://customgpt.ai/wp-content/uploads/2026/04/lehigh-university-logo-color.svg" alt="Lehigh University" height="36" />
+          </a>
+        </div>
+        <div class="proof-bar__logo" role="listitem">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/ismg-logo-color.svg" alt="ISMG — Information Security Media Group" height="36" />
+        </div>
+        <div class="proof-bar__logo" role="listitem">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/icfj-logo-color.svg" alt="ICFJ — International Center for Journalists" height="36" />
+        </div>
+        <div class="proof-bar__logo" role="listitem">
+          <a href="https://customgpt.ai/customer/gema/" target="_blank" rel="noopener noreferrer" data-cta-type="customers" data-cta-location="trust-bar">
+            <img src="https://customgpt.ai/wp-content/uploads/2026/04/gema-logo-color.svg" alt="GEMA" height="36" />
+          </a>
+        </div>
+        <div class="proof-bar__logo" role="listitem">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/dropbox-logo-color.svg" alt="Dropbox" height="36" />
+        </div>
+        <div class="proof-bar__logo" role="listitem">
+          <a href="https://customgpt.ai/customer/biamp/" target="_blank" rel="noopener noreferrer" data-cta-type="customers" data-cta-location="trust-bar">
+            <img src="https://customgpt.ai/wp-content/uploads/2026/04/biamp-logo-color.svg" alt="Biamp" height="36" />
+          </a>
+        </div>
+        <div class="proof-bar__logo" role="listitem">
+          <a href="https://customgpt.ai/customer/bqe/" target="_blank" rel="noopener noreferrer" data-cta-type="customers" data-cta-location="trust-bar">
+            <img src="https://customgpt.ai/wp-content/uploads/2026/04/bqe-logo-color.svg" alt="BQE Software" height="36" />
+          </a>
+        </div>
+        <div class="proof-bar__logo" role="listitem">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/alpa-logo-color.svg" alt="ALPA — Air Line Pilots Association" height="36" />
+        </div>
+        <div class="proof-bar__logo" role="listitem">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/adobe-logo-color.svg" alt="Adobe" height="36" />
+        </div>
+      </div>
+
+      <!-- Set 2 — decorative duplicate for seamless loop; aria-hidden hides from screen readers -->
+      <div class="proof-bar__set" aria-hidden="true">
+        <div class="proof-bar__logo">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/university-of-virginia-logo-color.svg" alt="" height="36" />
+        </div>
+        <div class="proof-bar__logo">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/united-nations-logo-color.svg" alt="" height="36" />
+        </div>
+        <div class="proof-bar__logo">
+          <a href="https://customgpt.ai/customer/chatmtc-mit-entrepreneurship/" target="_blank" rel="noopener noreferrer" tabindex="-1">
+            <img src="https://customgpt.ai/wp-content/uploads/2026/04/mit-logo-color.svg" alt="" height="36" />
+          </a>
+        </div>
+        <div class="proof-bar__logo">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/medtronic-logo-color.svg" alt="" height="36" />
+        </div>
+        <div class="proof-bar__logo">
+          <a href="https://customgpt.ai/customer/lehigh-university-the-brown-and-white/" target="_blank" rel="noopener noreferrer" tabindex="-1">
+            <img src="https://customgpt.ai/wp-content/uploads/2026/04/lehigh-university-logo-color.svg" alt="" height="36" />
+          </a>
+        </div>
+        <div class="proof-bar__logo">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/ismg-logo-color.svg" alt="" height="36" />
+        </div>
+        <div class="proof-bar__logo">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/icfj-logo-color.svg" alt="" height="36" />
+        </div>
+        <div class="proof-bar__logo">
+          <a href="https://customgpt.ai/customer/gema/" target="_blank" rel="noopener noreferrer" tabindex="-1">
+            <img src="https://customgpt.ai/wp-content/uploads/2026/04/gema-logo-color.svg" alt="" height="36" />
+          </a>
+        </div>
+        <div class="proof-bar__logo">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/dropbox-logo-color.svg" alt="" height="36" />
+        </div>
+        <div class="proof-bar__logo">
+          <a href="https://customgpt.ai/customer/biamp/" target="_blank" rel="noopener noreferrer" tabindex="-1">
+            <img src="https://customgpt.ai/wp-content/uploads/2026/04/biamp-logo-color.svg" alt="" height="36" />
+          </a>
+        </div>
+        <div class="proof-bar__logo">
+          <a href="https://customgpt.ai/customer/bqe/" target="_blank" rel="noopener noreferrer" tabindex="-1">
+            <img src="https://customgpt.ai/wp-content/uploads/2026/04/bqe-logo-color.svg" alt="" height="36" />
+          </a>
+        </div>
+        <div class="proof-bar__logo">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/alpa-logo-color.svg" alt="" height="36" />
+        </div>
+        <div class="proof-bar__logo">
+          <img src="https://customgpt.ai/wp-content/uploads/2026/04/adobe-logo-color.svg" alt="" height="36" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
