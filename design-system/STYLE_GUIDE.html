@@ -9,7 +9,7 @@
 <style>
   :root{
     --ink:#111827; --muted:#4b5563;
-    --rule:#b8b2a8; --soft:#f5f2eb; --neutral:#f0ede6; --page:#faf9f6;
+    --rule:#b8b2a8; --soft:#f0ede6; --neutral:#f0ede6; --page:#faf9f6;
     --primary:#7367f0;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -29,7 +29,7 @@
 
   /* ---- Cover ---- */
   .cover{padding:60px 0 30px;border-bottom:2px solid var(--ink);margin-bottom:26px;}
-  .cover .eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:14px;}
+  .cover .label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:14px;}
   .cover h1{margin-bottom:14px;}
   .cover .lead{font-size:15px;color:var(--muted);max-width:560px;}
   .cover .meta{margin-top:22px;font-size:11px;color:#9ca3af;}
@@ -114,7 +114,7 @@
 
   <!-- ===================== COVER ===================== -->
   <div class="cover">
-    <div class="eyebrow">CustomGPT.ai · Design System</div>
+    <div class="label">CustomGPT.ai · Design System</div>
     <h1>Brand &amp; Design Style Guide</h1>
     <p class="lead">The human-readable reference for design audits across CustomGPT.ai pages. Colors, type, components, and the non-negotiable rules every page must follow.</p>
     <div class="meta">
@@ -153,7 +153,7 @@
 
     <div class="group-label">Purple</div>
     <div class="swatch-grid">
-      <div class="swatch"><div class="chip" style="background:#7c3aed"></div><div class="info"><div class="name">Purple</div><div class="hex">#7C3AED</div><div class="token">--color-purple</div><div class="use">Eyebrows, italic accent, stat values, citation badges</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#7c3aed"></div><div class="info"><div class="name">Purple</div><div class="hex">#7C3AED</div><div class="token">--color-purple</div><div class="use">Accent text, stat values, citation badges</div></div></div>
     </div>
 
     <div class="group-label">Pink</div>
@@ -200,8 +200,8 @@
       <div class="type-sample"><span class="serif" style="font-size:20px;font-weight:600;">A faster way to deploy</span></div>
     </div>
     <div class="type-row">
-      <div class="type-spec"><span class="role">Eyebrow</span>Inter 700 · 13px · UPPERCASE · indigo · tracking .08em</div>
-      <div class="type-sample"><span style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7367f0;">Section label</span></div>
+      <div class="type-spec"><span class="role">Plan/card tier label</span>Inter 700 - 14px - UPPERCASE - muted</div>
+      <div class="type-sample"><span style="font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4b5563;">Premium</span></div>
     </div>
     <div class="type-row">
       <div class="type-spec"><span class="role">Lead / subheadline</span>Inter 400 · clamp 16–20px · muted · line 1.65</div>
@@ -233,7 +233,7 @@
       <tr><th class="mono">Token</th><th class="mono">Size</th><th>Use</th></tr>
       <tr><td class="mono">--text-xs</td><td class="mono">11px</td><td>Timestamps, smallest labels, friction microcopy</td></tr>
       <tr><td class="mono">--text-sm</td><td class="mono">12px</td><td>Badges, meta, secondary roles</td></tr>
-      <tr><td class="mono">--text-ui</td><td class="mono">13px</td><td>UI text, small buttons, captions, eyebrows</td></tr>
+      <tr><td class="mono">--text-ui</td><td class="mono">13px</td><td>UI text, small buttons, captions</td></tr>
       <tr><td class="mono">--text-base</td><td class="mono">14px</td><td>Card body, feature descriptions</td></tr>
       <tr><td class="mono">--text-md</td><td class="mono">15px</td><td>List items, base button text</td></tr>
       <tr><td class="mono">--text-body</td><td class="mono">16px</td><td>Page body base</td></tr>
@@ -244,7 +244,7 @@
     <h3 style="margin:16px 0 6px;">Rules</h3>
     <ul class="audit-list">
       <li>Italic is valid <strong>only</strong> for block quotes / testimonials (Lora family only).</li>
-      <li>Uppercase is valid <strong>only</strong> for eyebrows and plan/card tier labels.</li>
+      <li>Uppercase is valid <strong>only</strong> for plan/card tier labels.</li>
       <li>Weight 900 is valid <strong>only</strong> for the plan price display number; weight 800 only for secondary (add-on) price numbers.</li>
       <li>Never use em dashes in any copy. No decorative quotation-mark characters in testimonials.</li>
     </ul>

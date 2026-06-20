@@ -27,7 +27,7 @@
   --color-primary:          #7367f0;
   --color-primary-hover:    #5a52d4;   /* hover state */
 
-  /* Purple — eyebrows, italic accent, stat values, citation badges */
+  /* Purple — accent text, stat values, citation badges */
   --color-purple:           #7c3aed;
 
   /* Pink — marketing accent */
@@ -61,7 +61,7 @@
   ============================================================ */
   --color-on-dark:          #ffffff;              /* primary text on dark bg */
   --color-on-dark-muted:    rgba(255,255,255,.75);/* secondary text on dark bg */
-  --color-on-dark-accent:   #a5b4fc;              /* eyebrow / accent on dark bg (light indigo) */
+  --color-on-dark-accent:   #a5b4fc;              /* accent on dark bg (light indigo) */
 
   /* ============================================================
      BORDERS
@@ -98,7 +98,7 @@
   /* Type scale — body/UI sizes. Headings use clamp() in .h1–.h3 classes. */
   --text-xs:    11px;   /* timestamps, smallest labels */
   --text-sm:    12px;   /* badges, meta, secondary roles */
-  --text-ui:    13px;   /* UI text, small buttons, captions, eyebrows */
+  --text-ui:    13px;   /* UI text, small buttons, captions */
   --text-base:  14px;   /* card body, feature descriptions */
   --text-md:    15px;   /* list items, base button text */
   --text-body:  16px;   /* page body base */

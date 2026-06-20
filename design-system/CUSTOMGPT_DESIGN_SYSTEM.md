@@ -59,12 +59,12 @@ All headings must use `.h1`, `.h2`, or `.h3`. Never create a custom heading clas
 
 ### Supporting type classes
 ```css
-.eyebrow { font-family: var(--font); font-size: var(--text-ui); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-primary); margin-bottom: var(--sp3); display: block; }
-.eyebrow--light { color: var(--color-on-dark-accent); }   /* use ONLY on dark backgrounds */
 .lead { font-family: var(--font); font-size: clamp(16px, 1.5vw, 20px); line-height: 1.65; color: var(--color-text-muted); }
 .lead--light { color: var(--color-on-dark-muted); }   /* use ONLY on dark backgrounds */
 .accent { color: var(--color-primary); font-style: italic; display: block; }
 ```
+
+Section eyebrows and section-label microheadings are not part of the current system. New page sections should open with the heading and optional lead copy only.
 
 ### 2.3 Approved typography roles
 
@@ -75,8 +75,6 @@ This is the closed set of valid size × weight × color × style combinations. E
 | Page heading 1 | `.h1` | Lora | clamp(38–58px) | 700 | `--color-text` | none | normal |
 | Page heading 2 | `.h2` | Lora | clamp(28–44px) | 700 | `--color-text` | none | normal |
 | Section heading 3 | `.h3` | Lora | clamp(17–22px) | 600 | `--color-text` | none | normal |
-| Eyebrow (light bg) | `.eyebrow` | Inter | `--text-ui` | 700 | `--color-primary` | uppercase | normal |
-| Eyebrow (dark bg) | `.eyebrow--light` | Inter | `--text-ui` | 700 | `--color-on-dark-accent` | uppercase | normal |
 | Lead / subheadline (light bg) | `.lead` | Inter | clamp(16–20px) | 400 | `--color-text-muted` | none | normal |
 | Lead / subheadline (dark bg) | `.lead--light` | Inter | clamp(16–20px) | 400 | `--color-on-dark-muted` | none | normal |
 | Block quote (full-width) | `.tm-wrap__text`, `.cs-hero__quote` | Lora | clamp(17–21px) | 400 | `--color-text` | none | **italic** |
@@ -86,7 +84,7 @@ This is the closed set of valid size × weight × color × style combinations. E
 | Price unit (/mo) | `.plan__price-unit` | Inter | `--text-lg` | 500 | `--color-text-muted` | none | normal |
 | Secondary price (add-ons) | `.addon__price` | Inter | `--text-xl` | 800 | `--color-primary` | none | normal |
 | Secondary price unit | `.addon__price-unit` | Inter | `--text-sm` | 500 | `--color-text-muted` | none | normal |
-| Card / section label (uppercase) | `.plan__name` | Inter | `--text-base` | 700 | `--color-text-muted` | **uppercase** | normal |
+| Plan/card tier label (uppercase) | `.plan__name` | Inter | `--text-base` | 700 | `--color-text-muted` | **uppercase** | normal |
 | Card title / addon name | `.addon__name`, `.vp__title` | Inter | `--text-base` | 700 | `--color-text` | none | normal |
 | Feature item | `.plan__feature` | Inter | `--text-base` | 400 | `--color-text` | none | normal |
 | Card body / description | `.plan__desc`, `.vp__desc`, `.uc__desc` | Inter | `--text-base` | 400 | `--color-text-muted` | none | normal |
@@ -97,7 +95,7 @@ This is the closed set of valid size × weight × color × style combinations. E
 
 **Rules:**
 - Italic is only valid for block quotes / testimonials (Lora family only).
-- Uppercase is only valid for eyebrows and plan/card tier labels.
+- Uppercase is only valid for plan/card tier labels.
 - Weight 900 is only valid for the plan price display number.
 - Weight 800 is only valid for secondary price (add-on) numbers.
 - Any new combination of these axes requires operator approval and a new row above.
@@ -120,14 +118,12 @@ Section border rule: use `border-bottom` only. Never add `border-top` to a secti
 ### Section header (`.sec-hd`)
 ```css
 .sec-hd { max-width: 680px; margin: 0 auto 52px; text-align: center; }
-.sec-hd .eyebrow { margin-bottom: 10px; }
 .sec-hd h2 { margin-bottom: 14px; }
 ```
 
 HTML pattern:
 ```html
 <div class="sec-hd text-center">
-  <span class="eyebrow">Section label</span>
   <h2 class="h2">Section heading</h2>
   <p class="lead">Supporting description.</p>
 </div>
@@ -349,7 +345,6 @@ Rules: all images `loading="eager"` (never lazy — causes pop-in on loop). Add 
 ```html
 <div class="stats-strip">
   <div class="container">
-    <span class="eyebrow" style="display:block;text-align:center;margin-bottom:32px;">Across our [audience] customers</span>
     <div class="stats-strip__inner">
       <div class="stat">
         <div class="stat__val">88%</div>
@@ -392,7 +387,6 @@ Icon container colors rotate: indigo → pink → lavender (see § 5 Icons).
 <section class="section border-b">
   <div class="container">
     <div class="sec-hd text-center">
-      <span class="eyebrow">Section label</span>
       <h2 class="h2">Section heading</h2>
       <p class="lead">Supporting description.</p>
     </div>
@@ -558,7 +552,6 @@ No decorative quotation mark characters. No `"` or `"` visual decoration.
 <section class="section section--soft border-b">
   <div class="container">
     <div class="sec-hd text-center">
-      <span class="eyebrow">FAQs</span>
       <h2 class="h2">Heading</h2>
     </div>
     <div class="faq">
@@ -585,7 +578,6 @@ No decorative quotation mark characters. No `"` or `"` visual decoration.
 .security { background: var(--color-bg-dark); background-image: url('https://customgpt.ai/wp-content/uploads/2026/04/dark-blue-background-paper.webp'); background-size: cover; background-position: center; color: var(--color-on-dark); padding: var(--section-y) 0; }
 .security__header { text-align: center; max-width: 760px; margin: 0 auto 48px; }
 .security__header .h2 { margin-bottom: 16px; color: var(--color-on-dark) !important; }
-.security .eyebrow--light { color: var(--color-on-dark-accent) !important; }
 .security .lead--light { color: var(--color-on-dark-muted) !important; }
 .security__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-bottom: 48px; }
 .security-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); padding: 32px; display: flex; gap: 16px; align-items: flex-start; transition: transform var(--trans-fast); }
@@ -613,7 +605,6 @@ No decorative quotation mark characters. No `"` or `"` visual decoration.
 .final-cta { background: var(--color-bg-dark); background-image: url('https://customgpt.ai/wp-content/uploads/2026/04/pink-and-dark-blue-background.webp'); background-size: cover; background-position: center; color: var(--color-on-dark); padding: 96px 0; text-align: center; position: relative; overflow: hidden; }
 .final-cta__overlay { position: absolute; inset: 0; background: linear-gradient(rgba(10,10,30,.35), rgba(10,10,30,.45)); }
 .final-cta__content { position: relative; z-index: 1; }
-.final-cta .eyebrow { color: var(--color-on-dark-accent); margin-bottom: 12px; }
 .final-cta h2 { color: var(--color-on-dark); margin-bottom: 16px; }
 .final-cta .lead { margin-bottom: 36px; }
 .final-cta__friction { font-size: var(--text-xs); color: rgba(255,255,255,.4); margin-top: 14px; }
@@ -626,7 +617,6 @@ No decorative quotation mark characters. No `"` or `"` visual decoration.
   <div class="final-cta__overlay" aria-hidden="true"></div>
   <div class="container">
     <div class="final-cta__content">
-      <span class="eyebrow eyebrow--light">Ready to get started?</span>
       <h2 class="h2">Section heading</h2>
       <p class="lead lead--light">Supporting copy.</p>
       <div class="btn-group btn-group--center">
