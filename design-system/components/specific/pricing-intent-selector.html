@@ -1,0 +1,148 @@
+<!--
+  COMPONENT: Pricing Intent Selector
+  SOURCE: 2026 pricing page refresh
+  PURPOSE: Qualify plan path before revealing pricing cards.
+-->
+
+<style>
+  .pricing-section[data-intent=""] .plan-grid,
+  .pricing-section[data-intent=""] .intent-reset {
+    display: none;
+  }
+
+  .pricing-section:not([data-intent=""]) .intent {
+    display: none;
+  }
+
+  .intent {
+    max-width: 780px;
+    padding: var(--sp2) 0 var(--sp5);
+    text-align: left;
+  }
+
+  .intent__opts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp5);
+  }
+
+  .intent__opt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp2);
+    padding: var(--sp5);
+    border: 1.5px solid var(--btn-ghost-border);
+    background: transparent;
+    color: var(--btn-ghost-text);
+    text-align: left;
+    cursor: pointer;
+    transition: background var(--trans-base), border-color var(--trans-base), transform var(--trans-fast);
+  }
+
+  .intent__opt:hover {
+    background: var(--btn-ghost-bg-hover);
+    border-color: var(--btn-ghost-border-hover);
+    transform: translateY(-2px);
+  }
+
+  .intent__opt-title {
+    font-family: var(--font);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .intent__opt-sub {
+    font-family: var(--font);
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .intent__skip,
+  .intent-reset button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp2);
+    margin-top: var(--sp4);
+    padding: var(--sp3) var(--sp4);
+    border: 0;
+    background: transparent;
+    color: var(--color-primary);
+    font-family: var(--font);
+    font-size: var(--text-md);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .plan__veil {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp3);
+    padding: var(--sp5);
+    background: rgba(245,242,235,.45);
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .plan.is-obscured .plan__veil {
+    display: flex;
+  }
+
+  @media (max-width: 680px) {
+    .intent,
+    .intent__opt {
+      text-align: center;
+    }
+
+    .intent__opts {
+      grid-template-columns: 1fr;
+    }
+
+    .intent__opt {
+      align-items: center;
+    }
+  }
+</style>
+
+<section class="pricing-section" id="pricingSection" data-intent="">
+  <div class="container">
+    <div class="intent" id="intentSelector">
+      <div class="intent__opts" role="group" aria-label="How do you want to use CustomGPT.ai?">
+        <button class="intent__opt" type="button" data-intent="build" data-target-group="self">
+          <span class="intent__opt-title">Do it yourself</span>
+          <span class="intent__opt-sub">Self-serve plans you set up and run yourself.</span>
+        </button>
+        <button class="intent__opt" type="button" data-intent="partner" data-target-group="partner">
+          <span class="intent__opt-title">Partner with CustomGPT</span>
+          <span class="intent__opt-sub">A hands-on collaboration with our team.</span>
+        </button>
+      </div>
+      <button class="intent__skip" type="button" data-intent="all">Just show me all plans</button>
+    </div>
+
+    <div class="plan-grid">
+      <div class="plan" data-plan-group="self">
+        <button class="plan__veil" type="button"><span>Standard</span><span>Click to view</span></button>
+      </div>
+      <div class="plan" data-plan-group="self">
+        <button class="plan__veil" type="button"><span>Premium</span><span>Click to view</span></button>
+      </div>
+      <div class="plan" data-plan-group="partner">
+        <button class="plan__veil" type="button"><span>Enterprise</span><span>Click to view</span></button>
+      </div>
+    </div>
+
+    <div class="intent-reset">
+      <button type="button">Change my answer</button>
+    </div>
+  </div>
+</section>

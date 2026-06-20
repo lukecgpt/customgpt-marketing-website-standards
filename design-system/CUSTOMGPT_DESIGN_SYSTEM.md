@@ -3,6 +3,7 @@
 **Token source of truth:** `customgpt-design-system/customgpt-tokens.css`
 **Primary source page:** `membership-organizations.html`
 **Secondary source page:** `index-paper-blue.html`
+**Latest pricing refresh:** `pricing` generated HTML, reconciled 2026-06-20
 **Enforcement rule:** Any color, spacing value, font size, radius, shadow, or component not defined here requires operator approval before use. Approved additions go into `customgpt-tokens.css` and this document first.
 
 ---
@@ -52,9 +53,9 @@ p { margin: 0; padding: 0; }
 All headings must use `.h1`, `.h2`, or `.h3`. Never create a custom heading class that sets only `font-size` — it will render at the wrong `line-height`.
 
 ```css
-.h1 { font-family: 'Lora', Georgia, serif !important; font-size: clamp(38px, 5vw, 58px); font-weight: 700; line-height: 1.08; letter-spacing: -.02em; }
-.h2 { font-family: 'Lora', Georgia, serif !important; font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; line-height: 1.1; letter-spacing: -.015em; }
-.h3 { font-family: 'Lora', Georgia, serif !important; font-size: clamp(17px, 2vw, 22px); font-weight: 600; line-height: 1.25; letter-spacing: -.01em; }
+.h1 { font-family: 'Lora', Georgia, serif !important; font-size: clamp(38px, 5vw, 58px); font-weight: 700; line-height: 1.08; letter-spacing: 0; }
+.h2 { font-family: 'Lora', Georgia, serif !important; font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; line-height: 1.1; letter-spacing: 0; }
+.h3 { font-family: 'Lora', Georgia, serif !important; font-size: clamp(17px, 2vw, 22px); font-weight: 600; line-height: 1.25; letter-spacing: 0; }
 ```
 
 ### Supporting type classes
@@ -115,6 +116,28 @@ This is the closed set of valid size × weight × color × style combinations. E
 
 Section border rule: use `border-bottom` only. Never add `border-top` to a section that immediately follows another bordered section — it creates a doubled 3px line.
 
+### Section decoration
+
+Approved pricing-refresh decorative image variants:
+
+- `section-deco-blue-ball`
+- `section-deco-magnifying-glass`
+- `section-deco-pink-ball`
+
+Use these only as decorative section art. They must render with empty alt text, `aria-hidden="true"`, `pointer-events:none`, desktop-only visibility, and reduced-motion animation disabled.
+
+```css
+.section { position: relative; overflow: visible; }
+@keyframes sectionDecoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+.section-deco-blue-ball,
+.section-deco-magnifying-glass,
+.section-deco-pink-ball { position: absolute; width: 450px; height: 450px; object-fit: contain; pointer-events: none; animation: sectionDecoFloat 9s ease-in-out infinite; }
+.section-deco-blue-ball,
+.section-deco-pink-ball { left: -120px; top: -225px; }
+.section-deco-magnifying-glass { right: -120px; top: -225px; }
+@media (max-width: 900px) { .section-deco-blue-ball, .section-deco-magnifying-glass, .section-deco-pink-ball { display: none; } }
+```
+
 ### Section header (`.sec-hd`)
 ```css
 .sec-hd { max-width: 680px; margin: 0 auto 52px; text-align: center; }
@@ -144,7 +167,7 @@ HTML pattern:
 
 - **No button carries an arrow.** Arrows belong only to `.text-link` (inline discovery links that are not button-shaped, e.g. "See full pricing details").
 - **Consistent sizing.** A primary button is the same size whether it stands alone or sits in a button group. A lone primary is never larger than a paired one.
-- Ghost (light bg) styling per tokens: transparent fill, `#111827` text, `1.5px solid var(--btn-ghost-border)` (`#b8b2a8` warm tan) border. Hover: `var(--btn-ghost-bg-hover)` (`#f0ede6` neutral fill), text stays `#111827`, border-color → `var(--btn-ghost-border-hover)` (`#111827`), `translateY(-1px)`. Never an indigo hover.
+- Ghost (light bg) styling per tokens: transparent fill, `#111827` text, `1.5px solid var(--btn-ghost-border)` (`#b8b2a8` warm tan) border. Hover: `var(--btn-ghost-bg-hover)` (`#ede9e0` neutral fill), text stays `#111827`, border-color → `var(--btn-ghost-border-hover)` (`#111827`), `translateY(-1px)`. Never an indigo hover.
 - Pricing pattern: the featured ("Most Popular") plan uses the primary fill (`btn--primary`); all other plan CTAs are ghost secondaries — even when the action is "Try free for 7 days".
 
 ```css
@@ -527,7 +550,7 @@ No decorative quotation mark characters. No `"` or `"` visual decoration.
 .cs-hero__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
 .cs-hero__stat { padding: 22px 18px; background: var(--color-bg-neutral); border: 1.5px solid var(--color-border); transition: transform var(--trans-fast); }
 .cs-hero__stat:hover { transform: translateY(-2px); }
-.cs-hero__stat-val { font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: var(--color-primary); line-height: 1.1; letter-spacing: -.02em; margin-bottom: 6px; }
+.cs-hero__stat-val { font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: var(--color-primary); line-height: 1.1; letter-spacing: 0; margin-bottom: 6px; }
 .cs-hero__stat-lbl { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.4; }
 @media (max-width: 768px) { .cs-hero { grid-template-columns: 1fr; gap: 32px; padding: 32px 24px; } }
 ```
@@ -635,7 +658,55 @@ No decorative quotation mark characters. No `"` or `"` visual decoration.
 
 ---
 
-### 6.13 Footer
+### 6.13 Pricing Intent Selector
+
+Use this pattern when pricing needs to qualify the visitor before revealing plan cards.
+
+Rules:
+- The selector appears between the pricing hero copy and the plan grid.
+- The plan grid and billing toggle stay hidden until an intent is selected.
+- Include a "show all plans" path so the visitor can skip qualification.
+- Self-serve choices target Standard and Premium cards; partner choices target Enterprise cards.
+- Off-path cards use a soft blur veil and can be revealed by clicking the veil.
+
+```css
+.intent { max-width: 780px; padding: var(--sp2) 0 var(--sp5); text-align: left; }
+.intent__opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp5); }
+.intent__opt { display: flex; flex-direction: column; gap: var(--sp2); align-items: flex-start; padding: var(--sp5); background: transparent; border: 1.5px solid var(--btn-ghost-border); color: var(--btn-ghost-text); text-align: left; cursor: pointer; transition: background var(--trans-base), border-color var(--trans-base), transform var(--trans-fast); }
+.intent__opt:hover { background: var(--btn-ghost-bg-hover); border-color: var(--btn-ghost-border-hover); transform: translateY(-2px); }
+.intent__opt-title { font-family: var(--font); font-size: var(--text-lg); font-weight: 700; color: var(--color-text); }
+.intent__opt-sub { font-family: var(--font); font-size: var(--text-base); color: var(--color-text-muted); line-height: 1.5; }
+.plan__veil { position: absolute; inset: 0; z-index: 6; display: none; flex-direction: column; align-items: center; justify-content: center; gap: var(--sp3); padding: var(--sp5); background: rgba(245,242,235,.45); backdrop-filter: blur(7px); text-align: center; cursor: pointer; }
+.plan.is-obscured .plan__veil { display: flex; }
+@media (max-width: 680px) { .intent__opts { grid-template-columns: 1fr; } .intent, .intent__opt { text-align: center; } .intent__opt { align-items: center; } }
+```
+
+---
+
+### 6.14 Draggable Testimonial Scroller
+
+Use this for large testimonial strips, including pricing social proof.
+
+Rules:
+- Duplicate the testimonial set once for an infinite loop.
+- Use `mask-image` edge fades, not overlay divs.
+- Users can drag with mouse or touch.
+- Dragging pauses the animation at the current transform.
+- Releasing resumes the same infinite animation from the released offset; it must not jump back to the beginning.
+- Respect `prefers-reduced-motion`.
+
+```css
+.testimonial-scroller { overflow: hidden; cursor: grab; touch-action: pan-y; user-select: none; mask-image: linear-gradient(to right, transparent 0, #000 100px, #000 calc(100% - 100px), transparent 100%); }
+.testimonial-scroller.is-dragging { cursor: grabbing; }
+.testimonial-scroller__track { display: flex; width: max-content; gap: var(--sp5); animation: tsScroll 90s linear infinite; will-change: transform; }
+.testimonial-scroller.is-dragging .testimonial-scroller__track { animation-play-state: paused; }
+@keyframes tsScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .testimonial-scroller__track { animation: none; } }
+```
+
+---
+
+### 6.15 Footer
 
 ```css
 .footer { border-top: 1.5px solid var(--color-border); padding: 28px 0; }

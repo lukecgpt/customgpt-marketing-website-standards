@@ -9,7 +9,7 @@
 <style>
   :root{
     --ink:#111827; --muted:#4b5563;
-    --rule:#b8b2a8; --soft:#f0ede6; --neutral:#f0ede6; --page:#faf9f6;
+    --rule:#b8b2a8; --soft:#ede9e0; --neutral:#ede9e0; --page:#faf9f6;
     --primary:#7367f0;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -21,8 +21,8 @@
   .sheet{max-width:780px;margin:0 auto;padding:0;}
 
   h1,h2,h3,h4{font-family:'Lora',Georgia,serif;color:var(--ink);}
-  h1{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.1;}
-  h2{font-size:21px;font-weight:700;letter-spacing:-.015em;margin:0 0 4px;}
+  h1{font-size:34px;font-weight:700;letter-spacing:0;line-height:1.1;}
+  h2{font-size:21px;font-weight:700;letter-spacing:0;margin:0 0 4px;}
   h3{font-size:15px;font-weight:600;margin:0 0 6px;}
   p{margin:0 0 8px;}
   code,.mono{font-family:'SF Mono',Consolas,'Courier New',monospace;font-size:11px;}
@@ -120,7 +120,7 @@
     <div class="meta">
       <strong>Token source of truth:</strong> customgpt-tokens.css &nbsp;·&nbsp;
       <strong>Primary source page:</strong> membership-organizations.html<br>
-      <strong>Reconciled:</strong> 2026-05-28 &nbsp;·&nbsp; <strong>Generated:</strong> 2026-06-08
+      <strong>Reconciled:</strong> 2026-06-20 &nbsp;·&nbsp; <strong>Generated:</strong> 2026-06-20
     </div>
   </div>
 
@@ -154,6 +154,7 @@
     <div class="group-label">Purple</div>
     <div class="swatch-grid">
       <div class="swatch"><div class="chip" style="background:#7c3aed"></div><div class="info"><div class="name">Purple</div><div class="hex">#7C3AED</div><div class="token">--color-purple</div><div class="use">Accent text, stat values, citation badges</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#a78bfa"></div><div class="info"><div class="name">Lavender Accent</div><div class="hex">#A78BFA</div><div class="token">--color-accent</div><div class="use">Light accents, icon tint rotation, on-dark accents</div></div></div>
     </div>
 
     <div class="group-label">Pink</div>
@@ -162,10 +163,16 @@
       <div class="swatch"><div class="chip" style="background:#d93eea"></div><div class="info"><div class="name">Pink Hover</div><div class="hex">#D93EEA</div><div class="token">--color-pink-hover</div></div></div>
     </div>
 
+    <div class="group-label">Award</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:#b45309"></div><div class="info"><div class="name">Award Text</div><div class="hex">#B45309</div><div class="token">--color-award</div><div class="use">Recognition and award callouts</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#fef3c7"></div><div class="info"><div class="name">Award Background</div><div class="hex">#FEF3C7</div><div class="token">--color-award-bg</div><div class="use">Recognition badge fill</div></div></div>
+    </div>
+
     <div class="group-label">Backgrounds</div>
     <div class="swatch-grid">
       <div class="swatch"><div class="chip" style="background:#faf9f6"></div><div class="info"><div class="name">Page Base</div><div class="hex">#FAF9F6</div><div class="token">--color-bg</div><div class="use">Warm off-white — page background</div></div></div>
-      <div class="swatch"><div class="chip" style="background:#f0ede6"></div><div class="info"><div class="name">Neutral</div><div class="hex">#F0EDE6</div><div class="token">--color-bg-neutral</div><div class="use">Secondary cards, step cards</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#ede9e0"></div><div class="info"><div class="name">Neutral / Soft</div><div class="hex">#EDE9E0</div><div class="token">--color-bg-neutral</div><div class="use">Secondary cards, step cards, soft sections</div></div></div>
       <div class="swatch"><div class="chip" style="background:#0a0a1a"></div><div class="info"><div class="name">Dark</div><div class="hex">#0A0A1A</div><div class="token">--color-bg-dark</div><div class="use">Security, final CTA sections</div></div></div>
     </div>
 
@@ -173,6 +180,7 @@
     <div class="swatch-grid">
       <div class="swatch"><div class="chip" style="background:#111827"></div><div class="info"><div class="name">Text</div><div class="hex">#111827</div><div class="token">--color-text</div><div class="use">All primary: headlines, body, card text</div></div></div>
       <div class="swatch"><div class="chip" style="background:#4b5563"></div><div class="info"><div class="name">Text Muted</div><div class="hex">#4B5563</div><div class="token">--color-text-muted</div><div class="use">All secondary: labels, captions, support copy</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#9ca3af"></div><div class="info"><div class="name">Text Light</div><div class="hex">#9CA3AF</div><div class="token">--color-text-light</div><div class="use">Tertiary UI text, disabled marks, tooltip icons</div></div></div>
     </div>
 
     <div class="group-label">Borders</div>
@@ -189,11 +197,11 @@
 
     <div class="type-row">
       <div class="type-spec"><span class="role">H1 · Page heading</span>Lora 700 · clamp 38–58px · line 1.08</div>
-      <div class="type-sample"><span class="serif" style="font-size:38px;font-weight:700;letter-spacing:-.02em;line-height:1.05;">Build AI agents fast</span></div>
+      <div class="type-sample"><span class="serif" style="font-size:38px;font-weight:700;letter-spacing:0;line-height:1.05;">Build AI agents fast</span></div>
     </div>
     <div class="type-row">
       <div class="type-spec"><span class="role">H2 · Section heading</span>Lora 700 · clamp 28–44px · line 1.1</div>
-      <div class="type-sample"><span class="serif" style="font-size:28px;font-weight:700;letter-spacing:-.015em;">Why teams choose us</span></div>
+      <div class="type-sample"><span class="serif" style="font-size:28px;font-weight:700;letter-spacing:0;">Why teams choose us</span></div>
     </div>
     <div class="type-row">
       <div class="type-spec"><span class="role">H3 · Subsection</span>Lora 600 · clamp 17–22px · line 1.25</div>
@@ -261,7 +269,7 @@
       <span class="btn btn--primary">Start free trial</span>
       <span class="btn btn--ghost">Talk to sales</span>
     </div>
-    <p class="btn-note">btn--hero (primary, hero + bottom CTA) · btn--primary (standard primary) · btn--ghost (secondary: transparent fill, #111827 text, 1.5px #B8B2A8 tan border → hover fills #F0EDE6, border goes #111827)</p>
+    <p class="btn-note">btn--hero (primary, hero + bottom CTA) · btn--primary (standard primary) · btn--ghost (secondary: transparent fill, #111827 text, 1.5px #B8B2A8 tan border → hover fills #EDE9E0, border goes #111827)</p>
 
     <div class="group-label">On dark backgrounds</div>
     <div class="btn-demo dark">
@@ -341,6 +349,9 @@
       <tr><td>Use cases grid</td><td class="mono">.uc-grid</td><td>3-col numbered cards (01, 02…)</td></tr>
       <tr><td>How it works</td><td class="mono">.steps-grid</td><td>3 steps, large faded serif numbers, optional image</td></tr>
       <tr><td>Testimonial</td><td class="mono">.tm-wrap</td><td>Italic Lora quote, avatar + name + role</td></tr>
+      <tr><td>Section decoration</td><td class="mono">.section-deco-*</td><td>Desktop-only decorative pricing art: blue ball, magnifying glass, pink ball</td></tr>
+      <tr><td>Pricing intent selector</td><td class="mono">.intent</td><td>Two-option pricing qualifier with show-all path and plan reveal veils</td></tr>
+      <tr><td>Draggable testimonial scroller</td><td class="mono">.testimonial-scroller</td><td>Infinite testimonial loop with mouse/touch drag and resume-on-release</td></tr>
       <tr><td>Case study hero</td><td class="mono">.cs-hero</td><td>2-col, logo + quote + 4 stat tiles</td></tr>
       <tr><td>FAQ accordion</td><td class="mono">.faq</td><td>First item open by default, chevron rotates</td></tr>
       <tr><td>Security (dark)</td><td class="mono">.security</td><td>Dark bg image, 2-col cards, badge row</td></tr>
@@ -374,7 +385,7 @@
   </section>
 
   <div class="footer-note">
-    CustomGPT.ai Design System Style Guide · Generated 2026-06-08 from customgpt-tokens.css and CUSTOMGPT_DESIGN_SYSTEM.md. Any color, size, radius, shadow, or component not defined here requires operator approval before use. Token source of truth: customgpt-design-system/customgpt-tokens.css.
+    CustomGPT.ai Design System Style Guide · Generated 2026-06-20 from customgpt-tokens.css and CUSTOMGPT_DESIGN_SYSTEM.md. Any color, size, radius, shadow, or component not defined here requires operator approval before use. Token source of truth: customgpt-design-system/customgpt-tokens.css.
   </div>
 
 </div>

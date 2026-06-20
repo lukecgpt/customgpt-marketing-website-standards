@@ -2,14 +2,15 @@
  * CustomGPT Design System — Token Source of Truth
  * Primary source: membership-organizations.html
  * Secondary source: index-paper-blue.html
- * Last reconciled: 2026-06-08
+ * Last reconciled: 2026-06-20
  *
  * CONFLICTS RESOLVED (primary source wins):
  *   --color-bg:         #faf9f6  (pb had #ffffff — overridden)
- *   --color-bg-neutral: #f0ede6  (pb had #f9fafb — overridden)
+ *   --color-bg-neutral: #ede9e0  (pricing refresh tightened the warm neutral)
  *   --color-border:     #b8b2a8  (pb had #e5e7eb — overridden)
  *   --section-y:        88px     (pb had 96px — overridden)
  *   --color-primary and --color-primary-hover: aligned with pb values (2026-05-28)
+ *   Pricing page refresh added accent, award, and text-light tokens (2026-06-20)
  *
  * DESIGN CHOICES (see CUSTOMGPT_DESIGN_SYSTEM.md § Design Decisions):
  *   Shadow: always none.  Radius: always none (square corners everywhere).
@@ -29,6 +30,7 @@
 
   /* Purple — accent text, stat values, citation badges */
   --color-purple:           #7c3aed;
+  --color-accent:           #a78bfa;   /* lavender — light accents, icon tint rotation */
 
   /* Pink — marketing accent */
   --color-pink:             #EE55FF;
@@ -37,6 +39,11 @@
   /* Star — star ratings */
   --color-star:             #fbbf24;
 
+  /* Award — badges and recognition callouts */
+  --color-award:            #b45309;
+  --color-award-bg:         #fef3c7;
+  --color-award-border:     rgba(251,191,36,.3);
+
   /* Warning — upgrade nudges, billing callouts, non-destructive alerts */
   --color-warning:          #f97316;   /* orange — icon, text, strong border */
   --color-warning-dark:     #ea580c;   /* darker orange — hover, emphasis */
@@ -44,10 +51,11 @@
   --color-warning-border:   #fb923c;   /* mid orange border */
 
   /* ============================================================
-     BACKGROUNDS — 3 surface tokens, nothing else
+     BACKGROUNDS
   ============================================================ */
   --color-bg:               #faf9f6;   /* page base — warm off-white */
-  --color-bg-neutral:       #f0ede6;   /* secondary cards, step cards, section alternates */
+  --color-bg-neutral:       #ede9e0;   /* secondary cards, step cards, section alternates */
+  --color-bg-soft:          #ede9e0;   /* alias for soft sections in generated page output */
   --color-bg-dark:          #0a0a1a;   /* dark sections — security, final CTA */
 
   /* ============================================================
@@ -55,13 +63,14 @@
   ============================================================ */
   --color-text:             #111827;   /* all primary text: headlines, body, card text */
   --color-text-muted:       #4b5563;   /* all secondary text: labels, captions, supporting copy */
+  --color-text-light:       #9ca3af;   /* tertiary UI text, disabled marks, tooltip icons */
 
   /* ============================================================
      ON-DARK SURFACES — text/accents on dark sections (security, final CTA)
   ============================================================ */
   --color-on-dark:          #ffffff;              /* primary text on dark bg */
   --color-on-dark-muted:    rgba(255,255,255,.75);/* secondary text on dark bg */
-  --color-on-dark-accent:   #a5b4fc;              /* accent on dark bg (light indigo) */
+  --color-on-dark-accent:   #a78bfa;              /* accent on dark bg (lavender) */
 
   /* ============================================================
      BORDERS
@@ -75,7 +84,7 @@
   --btn-ghost-border:       #b8b2a8;   /* warm tan default border */
   --btn-ghost-text:         #111827;   /* near-black text */
   --btn-ghost-border-hover: #111827;   /* black border on hover */
-  --btn-ghost-bg-hover:     #f0ede6;   /* muted neutral fill on hover */
+  --btn-ghost-bg-hover:     #ede9e0;   /* muted neutral fill on hover */
 
   /* ============================================================
      RADIUS — always none. Square corners everywhere. No radius tokens.
