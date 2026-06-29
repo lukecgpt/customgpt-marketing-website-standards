@@ -57,6 +57,8 @@ The builder includes the full CustomGPT design system (CSS variables, typography
 
 **Design system is enforced inside this skill.** No raw hex outside `:root`. No other fonts. No layout values outside the token set.
 
+When downstream WordPress/theme work introduces a reusable design rule, token, or standards-aligned behavior, promote that rule back into this standards repo in the same work cycle. Downstream implementations should periodically refresh from this repo with a fast-forward pull before standards-aligned work and after long sessions, then mirror the latest source rule back into their local bridge files.
+
 ---
 
 ### Step 3 — `/customgpt-brand-audit`

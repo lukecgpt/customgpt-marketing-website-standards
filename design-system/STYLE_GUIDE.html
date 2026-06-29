@@ -11,6 +11,7 @@
     --ink:#111827; --muted:#4b5563;
     --rule:#b8b2a8; --soft:#ede9e0; --neutral:#ede9e0; --page:#faf9f6;
     --primary:#7367f0;
+    --btn-height:54px; --btn-mobile-width:min(80%,360px);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
@@ -78,7 +79,7 @@
   /* ---- Buttons preview ---- */
   .btn-demo{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:16px;border:1.5px solid var(--rule);background:var(--page);margin-bottom:10px;}
   .btn-demo.dark{background:#0a0a1a;border-color:#0a0a1a;}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-family:'Inter';font-size:13px;font-weight:600;border:1.5px solid #111827;cursor:pointer;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:var(--btn-height);min-height:var(--btn-height);padding:0 24px;font-family:'Inter';font-size:13px;font-weight:600;line-height:1.2;border:1.5px solid #111827;cursor:pointer;}
   .btn--hero{background:#7367f0;color:#fff;font-weight:700;}
   .btn--primary{background:#7367f0;color:#fff;}
   .btn--ghost{background:transparent;color:#111827;border:1.5px solid #b8b2a8;}
@@ -285,7 +286,7 @@
       <tr><td class="mono">btn--ghost</td><td>Secondary (light bg)</td><td>The secondary action in a pair on a light bg</td></tr>
       <tr><td class="mono">btn--ghost-light</td><td>Secondary (dark bg)</td><td>The secondary action in a pair on a dark bg</td></tr>
     </table>
-    <p class="sec-intro" style="margin-top:10px;"><strong>Consistent sizing:</strong> a primary button is the same size whether it stands alone or sits in a button group. A lone primary is never larger than a paired one. <strong>Pricing pattern:</strong> the featured ("Most Popular") plan uses the filled primary; every other plan CTA is a ghost secondary — even when the action is "Try free for 7 days." Shape: all buttons are square (no radius), no shadow, 1.5px border, hover lifts <span class="mono">translateY(-1px)</span>.</p>
+    <p class="sec-intro" style="margin-top:10px;"><strong>Consistent sizing:</strong> a primary button is the same size whether it stands alone or sits in a button group. Button-style CTAs are <span class="mono">54px</span> tall by default. On mobile, centered button-style CTAs use <span class="mono">min(80%, 360px)</span> instead of full width; full-width CTAs are reserved for card, table, or form-control layouts. <strong>Pricing pattern:</strong> the featured ("Most Popular") plan uses the filled primary; every other plan CTA is a ghost secondary — even when the action is "Try free for 7 days." Shape: all buttons are square (no radius), no shadow, 1.5px border, hover lifts <span class="mono">translateY(-1px)</span>.</p>
   </section>
 
   <!-- ===================== ICONS ===================== -->
@@ -328,6 +329,8 @@
       <tr><td class="mono">--w-hero</td><td class="mono">900px</td><td>Hero content column</td></tr>
       <tr><td class="mono">--w-prose</td><td class="mono">760px</td><td>Long-form text container</td></tr>
       <tr><td class="mono">--w-tight</td><td class="mono">560px</td><td>Narrow modals / CTAs</td></tr>
+      <tr><td class="mono">--btn-height</td><td class="mono">54px</td><td>Button-style CTA height</td></tr>
+      <tr><td class="mono">--btn-mobile-width</td><td class="mono">min(80%, 360px)</td><td>Centered mobile CTA width</td></tr>
       <tr><td class="mono">--section-y</td><td class="mono">88px</td><td>Standard section vertical padding</td></tr>
       <tr><td class="mono">--section-y-sm</td><td class="mono">64px</td><td>Compact section padding</td></tr>
       <tr><td class="mono">--section-y-lg</td><td class="mono">120px</td><td>Spacious section padding</td></tr>
@@ -376,6 +379,7 @@
       <li><strong>Background</strong> is warm off-white #FAF9F6 — not pure white #FFFFFF.</li>
       <li><strong>Borders</strong> are warm tan #B8B2A8 at 1.5px — not gray #E5E7EB. Bottom-border only on sections.</li>
       <li><strong>CTAs:</strong> one primary + one secondary per group; secondary is always ghost; chosen by background.</li>
+      <li><strong>CTA sizing:</strong> button-style CTAs are 54px tall; centered mobile CTAs use min(80%, 360px), not full width.</li>
       <li><strong>Primary size is consistent</strong> — a lone primary is no larger than a paired one.</li>
       <li><strong>No arrows on buttons.</strong> Arrows only on inline .text-link discovery links.</li>
       <li><strong>Icons</strong> are Lucide inline SVG, 22px in a 44px box, tints rotating indigo → pink → lavender.</li>

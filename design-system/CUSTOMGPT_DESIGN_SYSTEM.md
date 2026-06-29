@@ -169,20 +169,23 @@ HTML pattern:
 
 - **No button carries an arrow.** Arrows belong only to `.text-link` (inline discovery links that are not button-shaped, e.g. "See full pricing details").
 - **Consistent sizing.** A primary button is the same size whether it stands alone or sits in a button group. A lone primary is never larger than a paired one.
+- **Fixed button height.** Button-style CTAs use `height: var(--btn-height)` (`54px`) by default.
+- **Mobile CTA width.** On mobile, centered button-style CTAs use `width: var(--btn-mobile-width)` (`min(80%, 360px)`) instead of full width. Keep full-width CTAs only when they are bound to a card, table, or form control layout.
 - Ghost (light bg) styling per tokens: transparent fill, `#111827` text, `1.5px solid var(--btn-ghost-border)` (`#b8b2a8` warm tan) border. Hover: `var(--btn-ghost-bg-hover)` (`#ede9e0` neutral fill), text stays `#111827`, border-color → `var(--btn-ghost-border-hover)` (`#111827`), `translateY(-1px)`. Never an indigo hover.
 - Pricing pattern: the featured ("Most Popular") plan uses the primary fill (`btn--primary`); all other plan CTAs are ghost secondaries — even when the action is "Try free for 7 days".
 
 ```css
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 12px 24px; font-family: var(--font); font-size: var(--text-md);
-  font-weight: 600; white-space: nowrap; text-decoration: none; cursor: pointer; border: none;
+  height: var(--btn-height); min-height: var(--btn-height); padding: 0 24px;
+  font-family: var(--font); font-size: var(--text-md); font-weight: 600; line-height: 1.2;
+  white-space: nowrap; text-decoration: none; cursor: pointer; border: none;
   transition: background var(--trans-base), color var(--trans-base), border-color var(--trans-base), transform var(--trans-fast);
 }
 .btn .arr { display: inline-flex; flex-shrink: 0; transition: transform var(--trans-base); }
 .btn:hover .arr { transform: translateX(4px); }
 
-.btn--hero    { background: var(--color-primary); color: #fff; border: 1.5px solid #111827; padding: 12px 24px; font-size: var(--text-md); font-weight: 700; }
+.btn--hero    { background: var(--color-primary); color: #fff; border: 1.5px solid #111827; font-size: var(--text-md); font-weight: 700; }
 .btn--hero:hover { background: var(--color-primary-hover); color: #fff; transform: translateY(-1px); }
 
 .btn--primary { background: var(--color-primary); color: #fff; border: 1.5px solid #111827; }
@@ -196,6 +199,14 @@ HTML pattern:
 
 .btn-group { display: flex; align-items: center; gap: var(--sp3); flex-wrap: wrap; }
 .btn-group--center { justify-content: center; }
+
+@media (max-width: 768px) {
+  .btn-group--center .btn,
+  .text-center .btn {
+    width: var(--btn-mobile-width);
+    max-width: 100%;
+  }
+}
 ```
 
 Arrow SVG (inline, used **only** in `.text-link` discovery links — never on buttons):

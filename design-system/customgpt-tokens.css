@@ -11,6 +11,7 @@
  *   --section-y:        88px     (pb had 96px — overridden)
  *   --color-primary and --color-primary-hover: aligned with pb values (2026-05-28)
  *   Pricing page refresh added accent, award, and text-light tokens (2026-06-20)
+ *   Button sizing tokens added for consistent CTA height and centered mobile CTAs (2026-06-29)
  *
  * DESIGN CHOICES (see CUSTOMGPT_DESIGN_SYSTEM.md § Design Decisions):
  *   Shadow: always none.  Radius: always none (square corners everywhere).
@@ -79,12 +80,14 @@
   --color-border-soft:      #ede9fe;   /* soft lavender (light bg only, rare) */
 
   /* ============================================================
-     GHOST BUTTON
+     BUTTONS
   ============================================================ */
   --btn-ghost-border:       #b8b2a8;   /* warm tan default border */
   --btn-ghost-text:         #111827;   /* near-black text */
   --btn-ghost-border-hover: #111827;   /* black border on hover */
   --btn-ghost-bg-hover:     #ede9e0;   /* muted neutral fill on hover */
+  --btn-height:             54px;      /* button-style CTA height */
+  --btn-mobile-width:       min(80%, 360px); /* centered mobile CTA width */
 
   /* ============================================================
      RADIUS — always none. Square corners everywhere. No radius tokens.
