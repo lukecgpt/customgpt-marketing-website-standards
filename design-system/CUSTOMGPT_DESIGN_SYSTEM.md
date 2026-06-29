@@ -14,6 +14,8 @@
 
 **Radius: always none.** Square corners everywhere. No radius tokens. Enforced by the global reset (`border-radius: 0 !important`); the `!important` is required so the rule beats the parent theme's rounded-corner rules.
 
+**Surfaces: binary.** Two page surfaces only — base warm off-white `--color-bg` (`#faf9f6`) and one darker warm neutral `--color-bg-neutral` (`#ede9e0`). There is no third "soft" / "lavender" surface; retired values (`#f0ede6`, `#f5f2eb`, `#f8f7ff`) collapse to one of the two. Dark sections use `--color-bg-dark` (`#0a0a1a`).
+
 ---
 
 ## 1. Base Page Setup
@@ -811,6 +813,35 @@ $r = Invoke-RestMethod -Method Post -Uri "https://customgpt.ai/wp-json/rankmath/
 
 ### Caching
 Clear WP Rocket cache after any meta/OG image change or the update won't appear in social previews.
+
+### Staging publishes — the current path (onrocket)
+
+> The REST app-password method above is for direct production edits. The **staging** WordPress app password returns **401** for REST writes, so for staging (and the standard Ellpy flow) publish through the **`adorosario/customgpt-website-operations`** repo instead — its `Publish Page Content` Action uses SSH + WP-CLI and is not blocked by the 401.
+
+1. **Commit the page content** to `content/pages/<slug>.html` (+ optional `<slug>.meta.json` for RankMath title/description/canonical/OG). Git push to this repo frequently **hangs** — commit via the GitHub **Contents API** (`gh api -X PUT repos/adorosario/customgpt-website-operations/contents/content/pages/<slug>.html --input payload.json`) using the file's current `sha`. The sha is a hard guard: if the file moved since you read it, the write 409s instead of clobbering.
+2. **Run the `Publish Page Content` Action** (`workflow_dispatch`). Inputs: `environment` (staging|production), `post_id`, `branch=main`, `source_file`, `content_mode=standalone-html`, `meta_file`, `page_template`, `post_status=preserve`.
+3. **Homepage = post `37104`** (an Elementor page). To render plain HTML you MUST set `page_template=page-templates/page-flexible.php` AND clear Elementor via the meta JSON `meta` object: `"meta":{"_elementor_edit_mode":""}` — otherwise Elementor hijacks `the_content` and the page renders blank/old. (Live pricing = `13691`; pricing staging preview = `93240`.)
+
+### Sync before every publish — never blind-overwrite
+
+The publish replaces the **entire** page content, so a stale local file silently wipes anyone else's edits (this repo is actively edited by others). Before each publish:
+1. Fetch the current published fragment — `gh api repos/adorosario/customgpt-website-operations/contents/content/pages/<slug>.html?ref=main --jq .content | base64 -d`.
+2. `diff` it against your rebuilt fragment.
+3. Reconcile anything that isn't yours back into the source until the diff is **0**, then publish. Treat the published fragment as the source of truth, not your local file.
+
+### Publish a body-level fragment, never a full document
+
+Content must be a single `<div class="cgpt-[slug]">…</div>` wrapping the `<style>` + body content. Never publish a full `<html><head><body>` document: WordPress injects it inside its own `<body>`, the HTML parser strips the nested `<html>/<head>/<body>` tags, the `.cgpt-[slug]` scope class never lands on an element, and the **entire design system fails to apply** (the page renders nearly unstyled).
+
+### Beat the live theme + optimizer (required override layer)
+
+The live site overrides unscoped or non-`!important` page CSS. End the page `<style>` with a hardened, scoped override layer:
+
+- **Load fonts with `@import`, not `<link>`.** WordPress strips `<link>` tags from post content, so Inter/Lora must be loaded via `@import url(...)` as the FIRST line inside `<style>` (the `<style>` survives; the `<link>` does not). Without this, Lora silently falls back to a generic serif.
+- **A site-wide `cgpt-inter-font-normalization` block sets `font-family: Inter !important` on every element** (including heading child spans). To keep Lora on headings, override headings AND their descendants with `!important`:
+  `.cgpt-[slug] h2 *, .cgpt-[slug] .h1 *, .cgpt-[slug] .h2 *, .cgpt-[slug] .h3 * { font-family: 'Lora', Georgia, serif !important; }`
+- **The Starto parent theme styles bare `button`, `a`, and `li::before`.** Neutralize within scope: scope the button reset to `.cgpt-[slug] button`; reset links (`color: inherit; text-decoration: none` with `!important`); kill injected list markers (`.cgpt-[slug] li::before, .cgpt-[slug] li::after { content: none !important; }`).
+- **Verify by rendering, not grep.** Grepping served HTML only proves a rule is present, not that it wins the cascade — confirm with a headless-Chrome screenshot of the staging page before declaring done.
 
 ---
 
