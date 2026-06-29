@@ -167,7 +167,7 @@ HTML pattern:
 | `btn--ghost` | **Secondary CTA — light backgrounds** | The secondary action in a pair on a light bg (dark outline, indigo hover) | Never |
 | `btn--ghost-light` | **Secondary CTA — dark backgrounds** | The secondary action in a pair on a dark bg (white outline) | Never |
 
-- **No button carries an arrow.** Arrows belong only to `.text-link` (inline discovery links that are not button-shaped, e.g. "See full pricing details").
+- **No button carries an arrow.** Arrows belong only to `.text-link` (inline discovery links that are not button-shaped, e.g. "See full pricing details"). When an inline link needs an arrow, use the canonical `.cta-arrow` SVG pattern below. Do not use `→`, `&rarr;`, CSS-generated arrows, or one-off arrow classes. Text links are gray at rest, `font-weight: 600`, change to the main indigo on hover/focus, and move the arrow `4px` right on hover/focus.
 - **Consistent sizing.** A primary button is the same size whether it stands alone or sits in a button group. A lone primary is never larger than a paired one.
 - **Fixed button height.** Button-style CTAs use `height: var(--btn-height)` (`54px`) by default.
 - **Mobile CTA width.** On mobile, centered button-style CTAs use `width: var(--btn-mobile-width)` (`min(80%, 360px)`) instead of full width. Keep full-width CTAs only when they are bound to a card, table, or form control layout.
@@ -182,9 +182,6 @@ HTML pattern:
   white-space: nowrap; text-decoration: none; cursor: pointer; border: none;
   transition: background var(--trans-base), color var(--trans-base), border-color var(--trans-base), transform var(--trans-fast);
 }
-.btn .arr { display: inline-flex; flex-shrink: 0; transition: transform var(--trans-base); }
-.btn:hover .arr { transform: translateX(4px); }
-
 .btn--hero    { background: var(--color-primary); color: #fff; border: 1.5px solid #111827; font-size: var(--text-md); font-weight: 700; }
 .btn--hero:hover { background: var(--color-primary-hover); color: #fff; transform: translateY(-1px); }
 
@@ -211,7 +208,7 @@ HTML pattern:
 
 Arrow SVG (inline, used **only** in `.text-link` discovery links — never on buttons):
 ```html
-<span class="arr" aria-hidden="true">
+<span class="cta-arrow" aria-hidden="true">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M5 12h14M12 5l7 7-7 7"/>
   </svg>
@@ -220,10 +217,10 @@ Arrow SVG (inline, used **only** in `.text-link` discovery links — never on bu
 
 Text links (inline discovery, not button-shaped):
 ```css
-.text-link { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font); font-size: var(--text-base); color: var(--color-text-muted); font-weight: 600; transition: color var(--trans-base); }
-.text-link .arr { display: inline-flex; flex-shrink: 0; transition: transform var(--trans-base); }
-.text-link:hover { color: var(--color-primary); }
-.text-link:hover .arr { transform: translateX(4px); }
+.text-link { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font); font-size: var(--text-base); color: var(--color-text-muted); font-weight: 600; text-decoration: none; transition: color var(--trans-base); }
+.text-link .cta-arrow { display: inline-flex; flex-shrink: 0; transition: transform var(--trans-base); }
+.text-link:is(:hover, :focus-visible) { color: var(--color-primary); text-decoration: none; }
+.text-link:is(:hover, :focus-visible) .cta-arrow { transform: translateX(4px); }
 ```
 
 ---
@@ -539,7 +536,7 @@ Icon container colors rotate: indigo → pink → lavender (see § 5 Icons).
         </div>
       </div>
       <div style="margin-top:24px;">
-        <a href="[case-study-url]" class="btn btn--ghost">View case study<span class="arr" aria-hidden="true"><!-- arrow SVG --></span></a>
+        <a href="[case-study-url]" class="text-link">View case study<span class="cta-arrow" aria-hidden="true"><!-- canonical arrow SVG --></span></a>
       </div>
     </div>
   </div>
